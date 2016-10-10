@@ -1,0 +1,6 @@
+= bde
+
+Describe your project here
+
+:include:bde.rdoc
+

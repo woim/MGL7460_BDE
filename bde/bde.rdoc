@@ -1,0 +1,5 @@
+= bde
+
+Generate this with
+    bde rdoc
+After you have described your command line interface
