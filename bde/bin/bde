@@ -18,62 +18,118 @@ version Bde::VERSION
 subcommand_option_handling :normal
 arguments :strict
 
-desc 'Describe some switch here'
-switch [:s,:switch]
+# desc 'Describe some switch here'
+# switch [:s,:switch]
 
-desc 'Describe some flag here'
-default_value 'the default'
-arg_name 'The name of the argument'
-flag [:f,:flagname]
+desc 'Selectionne les cours'
+#default_value 'the default'
+arg_name 'cours'
+flag [:c,:class]
 
-desc 'Describe liste here'
-arg_name 'Describe arguments to liste here'
+desc 'Liste les eleves d\'un cours / liste les cours autrement'
+#arg_name 'Describe arguments to liste here'
 command :liste do |c|
-  c.desc 'Describe a switch to liste'
-  c.switch :s
+  # c.desc 'Describe a switch to liste'
+  # c.switch :s
 
-  c.desc 'Describe a flag to liste'
-  c.default_value 'default'
-  c.flag :f
+  # c.desc 'Describe a flag to liste'
+  # c.default_value 'default'
+  # c.flag :f
   c.action do |global_options,options,args|
 
-    # Your command logic here
-     
-    # If you have any errors, just raise them
-    # raise "that command made no sense"
+    #cours = global_options[:class]
+    #if cours.empty?
+      #baseDonneeCours.ListerCours()
+    #else
+      #if !baseDonneeCours.CoursExsite(cours)
+        #message = "cours: " + cours + "n\'existe pas.\n"
+        #puts message
+      #else
+        #baseDonneeCours.Select(cours).ListerEtudiants()
+      #end
+    #end
 
-    puts "liste command ran"
   end
 end
 
-desc 'Describe ajout here'
-arg_name 'Describe arguments to ajout here'
+desc 'Ajoute un eleve a un cours (format: --class=cours ajout nom prenom)'
+#arg_name 'nomEtudiant'
 command :ajout do |c|
   c.action do |global_options,options,args|
+    #~ cours          = global_options[:class]
+    #~ nomEtudiant    = args.shift 
+    #~ prenomEtudiant = args.shift
+    #~ etudiant = {'nom'=> nomEtudiant,'prenom'=>prenomEtudiant}
+    #~ if !baseDonneeCours.CoursExsite(cours)
+      #~ message = "cours: " + cours + "n\'existe pas.\n"
+      #~ puts message
+    #~ else
+      #~ baseDonneeCours.Select(cours).AjouterEtudiant(etudiant)
+    #~ end
     puts "ajout command ran"
   end
 end
 
-desc 'Describe retrait here'
-arg_name 'Describe arguments to retrait here'
+desc 'Retire un etudiant d\'un cours (format: --class=cours retrait nom prenom)'
+#arg_name 'nomEtudiant'
 command :retrait do |c|
   c.action do |global_options,options,args|
+    #~ cours       = global_options[:class]
+    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
+    #~ if !baseDonneeCours.CoursExsite(cours)
+      #~ message = "cours: " + cours + "n\'existe pas.\n"
+      #~ puts message
+    #~ else
+      #~ baseDonneeCours.Select(cours).RetirerEtudiant(nomEtudiant)
+    #~ end
     puts "retrait command ran"
   end
 end
 
-desc 'Describe evaluation here'
-arg_name 'Describe arguments to evaluation here'
-command :evaluation do |c|
+desc 'Liste les evaluations pour un eleve (format: --class=cours obtenirEvaluation nom prenom)'
+#arg_name 'Describe arguments to evaluation here'
+command :obtenirEvaluation do |c|
   c.action do |global_options,options,args|
-    puts "evaluation command ran"
+    #~ cours       = global_options[:class]
+    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
+    #~ if !baseDonneeCours.CoursExsite(cours)
+      #~ message = "cours: " + cours + "n\'existe pas.\n"
+      #~ puts message
+    #~ else
+      #~ baseDonneeCours.Select(cours).AfficherEvaluation(nomEtudiant)
+    #~ end
+    puts "obtenirEvaluation command ran"
   end
 end
 
-desc 'Describe moyenne here'
-arg_name 'Describe arguments to moyenne here'
+desc 'Saisit une evaluation pour un eleve (format: --class=cours saisirEvaluation nom prenom note)'
+#arg_name 'Describe arguments to evaluation here'
+command :saisirEvaluation do |c|  
+  c.action do |global_options,options,args|
+    #~ cours       = global_options[:class]
+    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
+    #~ if !baseDonneeCours.CoursExsite(cours)
+      #~ message = "cours: " + cours + "n\'existe pas.\n"
+      #~ puts message
+    #~ else
+      #~ baseDonneeCours.Select(cours).SaisirEvaluation(nomEtudiant,note)
+    #~ end
+    puts "saisirEvaluation command ran"
+  end
+end
+
+desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)'
+#arg_name 'Describe arguments to moyenne here'
 command :moyenne do |c|
   c.action do |global_options,options,args|
+    #~ cours       = global_options[:class]
+    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
+    #~ if !baseDonneeCours.CoursExsite(cours)
+      #~ message = "cours: " + cours + "n\'existe pas.\n"
+      #~ puts message
+    #~ else
+      #~ baseDonneeCours.Select(cours).AfficherMoyenne(nomEtudiant)
+    #~ end
     puts "moyenne command ran"
   end
 end
