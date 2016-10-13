@@ -95,7 +95,7 @@ command :obtenirEvaluation do |c|
       message = "cours: " + cours + "n\'existe pas.\n"
       puts message
     else
-      baseDonneeCours.selectionne_cours(cours).afficher_evaluation(nomEtudiant)
+      baseDonneeCours.selectionne_cours(cours).afficher_evaluation(etudiant)
     end
   end
 end
@@ -106,12 +106,12 @@ command :saisirEvaluation do |c|
   c.action do |global_options,options,args|
     cours    = global_options[:class]
     etudiant = Etudiant.new(args.shift,args.shift)
-    note     = arg.shift
+    note     = 12#arg.shift
     if !baseDonneeCours.cours_exsite(cours)
       message = "cours: " + cours + "n\'existe pas.\n"
       puts message
     else
-      baseDonneeCours.Select(cours).saisir_evaluation(etudiant,note)
+      baseDonneeCours.selectionne_cours(cours).saisir_evaluation(etudiant,note)
     end
   end
 end
@@ -120,13 +120,13 @@ desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)
 #arg_name 'Describe arguments to moyenne here'
 command :moyenne do |c|
   c.action do |global_options,options,args|
-    cours       = global_options[:class]
+    cours    = global_options[:class]
     etudiant = Etudiant.new(args.shift,args.shift)
     if !baseDonneeCours.cours_exsite(cours)
       message = "cours: " + cours + "n\'existe pas.\n"
       puts message
     else
-      baseDonneeCours.Select(cours).AfficherMoyenne(nomEtudiant)
+      baseDonneeCours.selectionne_cours(cours).afficher_moyenne(etudiant)
     end
   end
 end

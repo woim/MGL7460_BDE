@@ -1,6 +1,11 @@
 class Cours
   attr_accessor :sigle
   @etudiants = []
+  def initialize()
+  end
+  def initialize(sigle)
+    @sigle = sigle
+  end
 	def lister_etudiants()
 		puts "liste les etudiants"
   end
@@ -14,7 +19,7 @@ class Cours
 		puts "afficher evalaution etudiant"
 	end
   def saisir_evaluation(etudiant,note)
-		puts "saisir evaluatioin etudiant"	
+		puts "saisir evaluation etudiant"	
 	end
   def afficher_moyenne(etudiant)
 		puts "afficher moyenne etudiant"
