@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 require 'gli'
 begin # XXX: Remove this begin/rescue before distributing your app
+
 require 'bde'
+
 rescue LoadError
   STDERR.puts "In development, you need to use `bundle exec bin/bde` to run your app"
   STDERR.puts "At install-time, RubyGems will make sure lib, etc. are in the load path"
@@ -17,6 +19,9 @@ version Bde::VERSION
 
 subcommand_option_handling :normal
 arguments :strict
+
+# Declaration de variable
+baseDonneeCours = BdCours.new()
 
 # desc 'Describe some switch here'
 # switch [:s,:switch]
@@ -36,19 +41,17 @@ command :liste do |c|
   # c.default_value 'default'
   # c.flag :f
   c.action do |global_options,options,args|
-
-    #cours = global_options[:class]
-    #if cours.empty?
-      #baseDonneeCours.ListerCours()
-    #else
-      #if !baseDonneeCours.CoursExsite(cours)
-        #message = "cours: " + cours + "n\'existe pas.\n"
-        #puts message
-      #else
-        #baseDonneeCours.Select(cours).ListerEtudiants()
-      #end
-    #end
-
+    cours = global_options[:class]
+    if cours.nil?
+      baseDonneeCours.lister_cours()
+    else
+      if !baseDonneeCours.cours_exsite(cours)
+        message = "cours: " + cours + " n\'existe pas.\n"
+        puts message
+      else
+        baseDonneeCours.selectionne_cours(cours).lister_etudiants()
+      end
+    end
   end
 end
 
@@ -56,17 +59,14 @@ desc 'Ajoute un eleve a un cours (format: --class=cours ajout nom prenom)'
 #arg_name 'nomEtudiant'
 command :ajout do |c|
   c.action do |global_options,options,args|
-    #~ cours          = global_options[:class]
-    #~ nomEtudiant    = args.shift 
-    #~ prenomEtudiant = args.shift
-    #~ etudiant = {'nom'=> nomEtudiant,'prenom'=>prenomEtudiant}
-    #~ if !baseDonneeCours.CoursExsite(cours)
-      #~ message = "cours: " + cours + "n\'existe pas.\n"
-      #~ puts message
-    #~ else
-      #~ baseDonneeCours.Select(cours).AjouterEtudiant(etudiant)
-    #~ end
-    puts "ajout command ran"
+    cours    = global_options[:class]
+    etudiant = Etudiant.new(args.shift,args.shift) 
+    if !baseDonneeCours.cours_exsite(cours)
+      message = "cours: " + cours + "n\'existe pas.\n"
+      puts message
+    else
+      baseDonneeCours.selectionne_cours(cours).ajouter_etudiant(etudiant)
+    end
   end
 end
 
@@ -74,15 +74,14 @@ desc 'Retire un etudiant d\'un cours (format: --class=cours retrait nom prenom)'
 #arg_name 'nomEtudiant'
 command :retrait do |c|
   c.action do |global_options,options,args|
-    #~ cours       = global_options[:class]
-    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
-    #~ if !baseDonneeCours.CoursExsite(cours)
-      #~ message = "cours: " + cours + "n\'existe pas.\n"
-      #~ puts message
-    #~ else
-      #~ baseDonneeCours.Select(cours).RetirerEtudiant(nomEtudiant)
-    #~ end
-    puts "retrait command ran"
+    cours    = global_options[:class]
+    etudiant = Etudiant.new(args.shift,args.shift)
+    if !baseDonneeCours.cours_exsite(cours)
+      message = "cours: " + cours + "n\'existe pas.\n"
+      puts message
+    else
+      baseDonneeCours.selectionne_cours(cours).retirer_etudiant(etudiant)
+    end
   end
 end
 
@@ -90,15 +89,14 @@ desc 'Liste les evaluations pour un eleve (format: --class=cours obtenirEvaluati
 #arg_name 'Describe arguments to evaluation here'
 command :obtenirEvaluation do |c|
   c.action do |global_options,options,args|
-    #~ cours       = global_options[:class]
-    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
-    #~ if !baseDonneeCours.CoursExsite(cours)
-      #~ message = "cours: " + cours + "n\'existe pas.\n"
-      #~ puts message
-    #~ else
-      #~ baseDonneeCours.Select(cours).AfficherEvaluation(nomEtudiant)
-    #~ end
-    puts "obtenirEvaluation command ran"
+    cours    = global_options[:class]
+    etudiant = Etudiant.new(args.shift,args.shift)
+    if !baseDonneeCours.cours_exsite(cours)
+      message = "cours: " + cours + "n\'existe pas.\n"
+      puts message
+    else
+      baseDonneeCours.selectionne_cours(cours).afficher_evaluation(nomEtudiant)
+    end
   end
 end
 
@@ -106,15 +104,15 @@ desc 'Saisit une evaluation pour un eleve (format: --class=cours saisirEvaluatio
 #arg_name 'Describe arguments to evaluation here'
 command :saisirEvaluation do |c|  
   c.action do |global_options,options,args|
-    #~ cours       = global_options[:class]
-    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
-    #~ if !baseDonneeCours.CoursExsite(cours)
-      #~ message = "cours: " + cours + "n\'existe pas.\n"
-      #~ puts message
-    #~ else
-      #~ baseDonneeCours.Select(cours).SaisirEvaluation(nomEtudiant,note)
-    #~ end
-    puts "saisirEvaluation command ran"
+    cours    = global_options[:class]
+    etudiant = Etudiant.new(args.shift,args.shift)
+    note     = arg.shift
+    if !baseDonneeCours.cours_exsite(cours)
+      message = "cours: " + cours + "n\'existe pas.\n"
+      puts message
+    else
+      baseDonneeCours.Select(cours).saisir_evaluation(etudiant,note)
+    end
   end
 end
 
@@ -122,15 +120,14 @@ desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)
 #arg_name 'Describe arguments to moyenne here'
 command :moyenne do |c|
   c.action do |global_options,options,args|
-    #~ cours       = global_options[:class]
-    #~ nomEtudiant = args.shift  # prevoir une fonction pour filtrer entre
-    #~ if !baseDonneeCours.CoursExsite(cours)
-      #~ message = "cours: " + cours + "n\'existe pas.\n"
-      #~ puts message
-    #~ else
-      #~ baseDonneeCours.Select(cours).AfficherMoyenne(nomEtudiant)
-    #~ end
-    puts "moyenne command ran"
+    cours       = global_options[:class]
+    etudiant = Etudiant.new(args.shift,args.shift)
+    if !baseDonneeCours.cours_exsite(cours)
+      message = "cours: " + cours + "n\'existe pas.\n"
+      puts message
+    else
+      baseDonneeCours.Select(cours).AfficherMoyenne(nomEtudiant)
+    end
   end
 end
 
