@@ -11,12 +11,18 @@ require 'cucumber/rake/task'
 
 task :default => [:run]
 
-task :tests => [:acceptation_tests]
+task :tests => [:acceptation_tests, :tests_unitaires]
+
+task :tests_unitaires => [:test_format]
 
 task :acceptation_tests => [:acceptation_liste]
 
 task :run do
   sh %{bundle exec bin/bde}
+end
+
+task :test_format do
+  sh %{rake test TEST=test/test_formattage}
 end
 
 task :acceptation_liste do
