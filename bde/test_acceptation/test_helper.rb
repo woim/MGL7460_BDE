@@ -19,9 +19,24 @@ def bde_cli( cmd )
   %x{bundle exec bin/bde #{cmd}}.split("\n")
 end
 
-
-def creer_base_donnee
+def sauvergarder_base_donnee
+  %x{mv .bde.txt .bde_backup.txt}
 end
 
-def effacer_base_donnee
+def restaurer_base_donnee
+  %x{mv .bde_backup.txt .bde.txt }
+end
+
+def creer_base_donnee( base_donnee_test, nom_fichier )
+  sauvergarder_base_donnee
+  File.open( nom_fichier,"w" ) do |fich|
+    base_donnee_test.each do |ligne|
+      fich.puts ligne
+    end
+  end
+end
+
+def effacer_base_donnee( nom_fichier )
+  FileUtils.rm_f nom_fichier
+  restaurer_base_donnee
 end
