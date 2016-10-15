@@ -1,20 +1,19 @@
 class Etudiant
-	attr_accessor :prenom, :nom
-	def initialize()
-		@notes = []
-  end
-  def initialize(nom,prenom)
-		@notes  = []
+	attr_accessor :nom
+  attr_reader :prenoms 
+  @notes = []
+  @prenoms = []
+  def self.initialize( nom, *args )
     @nom    = nom
-    @prenom = prenom
+    @prenom = *args
   end
-	def ajout_note(note)
+	def self.ajouter_note(note)
 		puts "ajoute note"
   end
-	def bulletin_notes()
+	def self.recuperer_notes()
 		puts "retourne les notes"
   end
-	def affciher_notes()
+	def self.afficher_notes()
 		puts "affiche les notes"
   end
 end

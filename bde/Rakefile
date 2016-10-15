@@ -21,6 +21,10 @@ task :run do
   sh %{bundle exec bin/bde}
 end
 
+task :test_etudiant do
+  sh %{rake test TEST=test/test_etudiant}
+end
+
 task :test_format do
   sh %{rake test TEST=test/test_formattage}
 end
