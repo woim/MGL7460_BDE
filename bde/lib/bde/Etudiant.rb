@@ -1,19 +1,19 @@
 class Etudiant
 	attr_accessor :nom
   attr_reader :prenoms 
-  @notes = []
-  @prenoms = []
-  def self.initialize( nom, *args )
-    @nom    = nom
-    @prenom = *args
+  attr_reader :notes
+  def initialize( nom, *args )
+    fail "un etudiant doit avoir au moins un nom et un prenom" if args.empty?
+    @nom = nom
+    @prenoms = args
+    @notes = []
   end
-	def self.ajouter_note(note)
-		puts "ajoute note"
+	def ajouter_note( *args )
+    fail "les arguments ne peuvent etre que des chiffres entier" unless args.all?{ |x| ( x.is_a? Numeric ) && x >= 0 }
+ 		@notes.concat( args )
+    @notes = @notes.flatten
   end
-	def self.recuperer_notes()
-		puts "retourne les notes"
-  end
-	def self.afficher_notes()
-		puts "affiche les notes"
+	def afficher_notes
+    @notes.join(" ")    
   end
 end
