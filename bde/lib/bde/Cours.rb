@@ -9,8 +9,8 @@ class Cours
   end
 	def lister_etudiants
   return "" if @etudiants.empty?
-		@etudiants.each_index do |i|
-      #puts @etudiants[i].nom @etudiants[i].prenoms.join(" ")
+		@etudiants.each do |eleve|
+      puts eleve.nom #eleve.prenoms.join(" ")
     end      
   end
 	def ajouter_etudiant(etudiant)
