@@ -1,4 +1,3 @@
-
 class BdCours
   @cours = []
   def initialize()
