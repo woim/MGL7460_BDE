@@ -13,7 +13,7 @@ task :default => [:run]
 
 task :tests => [:acceptation_tests, :tests_unitaires]
 
-task :tests_unitaires => [:test_format]
+task :tests_unitaires => [:test_etudiant, :test_cours]
 
 task :acceptation_tests => [:acceptation_liste]
 
@@ -23,6 +23,10 @@ end
 
 task :test_etudiant do
   sh %{rake test TEST=test/test_etudiant}
+end
+
+task :test_cours do
+  sh %{rake test TEST=test/test_cours}
 end
 
 task :test_format do

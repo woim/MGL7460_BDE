@@ -1,19 +1,26 @@
 class Cours
-  attr_accessor :sigle
-  @etudiants = []
-  def initialize()
-  end
-  def initialize(sigle)
+  attr_reader :sigle
+  attr_reader :etudiants
+  def initialize( sigle )
+    fail "Le nom du cours doit etre de format SSSDDD" \
+      unless sigle =~ /[A-Z][A-Z][A-Z]\d\d\d/
     @sigle = sigle
+    @etudiants = []
   end
-	def lister_etudiants()
-		puts "liste les etudiants"
+	def lister_etudiants
+  return "" if @etudiants.empty?
+		@etudiants.each_index do |i|
+      #puts @etudiants[i].nom @etudiants[i].prenoms.join(" ")
+    end      
   end
 	def ajouter_etudiant(etudiant)
-		puts "ajoute un etudiant"
+		fail "L'argument n'est pas de type etudiant" \
+      unless etudiant.instance_of? Etudiant
+    @etudiants.push(etudiant)
 	end
   def retirer_etudiant(etudiant)
-		puts "retire etudiant"
+    fail "L'argument n'est pas de type etudiant" \
+      unless etudiant.instance_of? Etudiant
 	end
   def afficher_evaluation(etudiant)
 		puts "afficher evalaution etudiant"

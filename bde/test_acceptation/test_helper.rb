@@ -29,7 +29,7 @@ end
 
 def creer_base_donnee( base_donnee_test, nom_fichier )
   sauvergarder_base_donnee
-  File.open( nom_fichier,"w" ) do |fich|
+  File.open( nom_fichier, "w" ) do |fich|
     base_donnee_test.each do |ligne|
       fich.puts ligne
     end
