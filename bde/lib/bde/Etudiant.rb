@@ -18,4 +18,7 @@ class Etudiant
 	def afficher_notes
     @notes.join(" ")    
   end
+  def afficher_etat_civil
+    return @nom + " " + @prenoms.join(" ")
+  end
 end

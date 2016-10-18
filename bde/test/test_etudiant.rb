@@ -13,13 +13,13 @@ describe Etudiant do
   
     it "cree un etudiant en donnant nom et prenom" do
       etudiant = Etudiant.new( nom1, prenom1 )
-      etudiant.nom.must_equal(nom1)
-      etudiant.prenoms.must_equal([prenom1])
+      etudiant.nom.must_equal( nom1 )
+      etudiant.prenoms.must_equal( [prenom1] )
     end
     
     it "cree un etudiant en donnant nom et 2 prenoms" do
       etudiant = Etudiant.new( nom1, prenom1, prenom2 )
-      etudiant.nom.must_equal(nom1)
+      etudiant.nom.must_equal( nom1 )
       etudiant.prenoms.must_equal( [prenom1, prenom2] )
     end
   end
@@ -32,36 +32,50 @@ describe Etudiant do
     before { @etudiant = Etudiant.new("Robert","Lapin") } 
         
     it "ajoute une note" do
-      @etudiant.ajouter_note(note)
+      @etudiant.ajouter_note( note )
       @etudiant.notes.must_equal( [15] )
     end
     
     it "ajoute des notes" do
-      @etudiant.ajouter_note(note)
-      @etudiant.ajouter_note(notes1)
+      @etudiant.ajouter_note( note )
+      @etudiant.ajouter_note( notes1 )
       @etudiant.notes.must_equal( [15, 15, 16, 17] )
     end    
     
     it "saisit avec lettre" do
-      lambda{ @etudiant.ajouter_note(notes2) }.must_raise( RuntimeError )
+      lambda{ @etudiant.ajouter_note( notes2 ) }.must_raise( RuntimeError )
     end
     
     it "saisit nombre negatif" do
-      lambda{ @etudiant.ajouter_note(notes3) }.must_raise( RuntimeError )
+      lambda{ @etudiant.ajouter_note( notes3 ) }.must_raise( RuntimeError )
     end
   end
   
   describe "#afficher_notes" do
     let(:notes) { [15, 16, 17] }
-    before { @etudiant = Etudiant.new("Robert","Lapin") }    
+    before { @etudiant = Etudiant.new( "Robert", "Lapin" ) }    
     
     it "affiche rien si aucune note saisie" do
       @etudiant.afficher_notes.must_be_empty
     end
     
     it "afficher les notes" do
-      @etudiant.ajouter_note(notes)
+      @etudiant.ajouter_note( notes )
       @etudiant.afficher_notes.must_equal "15 16 17"
     end   
-  end  
+  end
+  
+  describe "#afficher_etat_civil" do
+    before { 
+      @etudiant1 = Etudiant.new( "Robert", "Lapin" )
+      @etudiant2 = Etudiant.new( "Robert", "Lapin", "Garou" ) }    
+    
+    it "afficher etat civil etudiant" do
+      @etudiant1.afficher_etat_civil.must_equal "Robert Lapin"
+    end
+    
+    it "afficher etat civil etudiant avec 2 prenoms" do
+      @etudiant2.afficher_etat_civil.must_equal "Robert Lapin Garou"
+    end
+  end
 end
