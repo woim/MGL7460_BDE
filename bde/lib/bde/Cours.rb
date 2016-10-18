@@ -8,10 +8,11 @@ class Cours
     @etudiants = []
   end
 	def lister_etudiants
-  return "" if @etudiants.empty?
-		@etudiants.each do |eleve|
-      puts eleve.nom #eleve.prenoms.join(" ")
-    end      
+    liste = String.new
+    @etudiants.each do |eleve|
+      liste += eleve.nom + " " + eleve.prenoms.join(" ") + "\n"
+    end
+    return liste      
   end
 	def ajouter_etudiant(etudiant)
 		fail "L'argument n'est pas de type etudiant" \
@@ -21,6 +22,7 @@ class Cours
   def retirer_etudiant(etudiant)
     fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
+      puts "retirer etudiant"
 	end
   def afficher_evaluation(etudiant)
 		puts "afficher evalaution etudiant"
