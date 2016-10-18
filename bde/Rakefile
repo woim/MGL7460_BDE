@@ -6,21 +6,25 @@ require 'cucumber'
 require 'cucumber/rake/task'
 
 ########################################################################
-# Execution des tests
+# Definition des taches
 ########################################################################
-
 task :default => [:run]
 
 task :tests => [:acceptation_tests, :tests_unitaires]
 
-task :tests_unitaires => [:test_etudiant, :test_cours]
+task :tests_unitaires => [:test_etudiant, :test_cours, :test_bdCours]
 
 task :acceptation_tests => [:acceptation_liste]
 
 task :run do
   sh %{bundle exec bin/bde}
 end
+########################################################################
 
+
+########################################################################
+# Test Unitaire
+########################################################################
 task :test_etudiant do
   sh %{rake test TEST=test/test_etudiant}
 end
@@ -29,18 +33,26 @@ task :test_cours do
   sh %{rake test TEST=test/test_cours}
 end
 
+task :test_bdCours do
+  sh %{rake test TEST=test/test_baseDonneeCours}
+end
+
 task :test_format do
   sh %{rake test TEST=test/test_formattage}
 end
+########################################################################
 
+
+########################################################################
+# Test Acceptation
+########################################################################
 task :acceptation_liste do
   sh %{rake test_acceptation TEST=test_acceptation/liste_test.rb}
 end
-
 ########################################################################
 
-########################################################################
 
+########################################################################
 Rake::RDocTask.new do |rd|
   rd.main = "README.rdoc"
   rd.rdoc_files.include("README.rdoc","lib/**/*.rb","bin/**/*")
@@ -83,3 +95,4 @@ Rake::TestTask.new(:test_acceptation) do |t|
   t.libs << "test_acceptation"
   t.test_files = FileList['test_acceptation/*_test.rb']
 end
+########################################################################
