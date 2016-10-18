@@ -10,7 +10,7 @@ class Cours
 	def lister_etudiants
     liste = String.new
     @etudiants.each do |eleve|
-      liste += eleve.nom + " " + eleve.prenoms.join(" ") + "\n"
+      liste += eleve.afficher_etat_civil + "\n"
     end
     return liste      
   end
