@@ -1,10 +1,10 @@
 class FormatBd
 
-  def self.extraire_cours_information( champ )
+  def self.extraire_information( champ )
  
   end
   
-  def self.ecrire_cours_information( cours )
+  def self.ecrire_information( cours )
   
   end
   

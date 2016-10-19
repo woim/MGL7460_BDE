@@ -37,6 +37,10 @@ task :test_bdCours do
   sh %{rake test TEST=test/test_baseDonneeCours}
 end
 
+task :test_accesseur do
+  sh %{rake test TEST=test/test_accesseur}
+end
+
 task :test_format do
   sh %{rake test TEST=test/test_formattage}
 end
