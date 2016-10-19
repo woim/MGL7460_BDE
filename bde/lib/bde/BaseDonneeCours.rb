@@ -2,6 +2,7 @@ class BdCours
   attr_reader :cours
   def initialize
     @cours = []
+    @accesseur = nil
   end  
   def cours_exsite(sigle_cours)
     return true
@@ -9,15 +10,24 @@ class BdCours
   def assigner_accesseur( accesseur ) 
     @accesseur = accesseur
   end
-  def charger_base_donnee(nom_fichier)
+  def charger_base_donnee( nom_fichier )
+    fail "Le fichier n'existe pas" unless File.file?( nom_fichier )
+    fail "Un accesseur doit etre assigne avant de charger une base de 
+          donnee" if @accesseur == nil
     @cours = @accesseur.charger_base_donnee( nom_fichier )
   end
   def ajouter_cours(sigle_cours)
       puts "ajout cours"
   end
   def selectionner_cours(sigle_cours)
-    puts "selectionne cours"
-    return Cours.new('MATH00')
+    fail "Le nom du cours doit etre de format SSSDDD" \
+      unless sigle_cours =~ /[A-Z][A-Z][A-Z]\d\d\d/
+    index_cours = @cours.find_index{ |c| c.sigle.to_s == sigle_cours }
+    if index_cours != nil
+      return @cours[index_cours] 
+    else
+      return nil
+    end
   end
   def lister_cours()
     liste = String.new
