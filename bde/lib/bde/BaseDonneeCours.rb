@@ -1,19 +1,20 @@
 class BdCours
   attr_reader :cours
-  def initialize
+  def initialize( accesseur )
+    #~ fail "L'argument n'est pas de type Accesseur" \
+      #~ unless accesseur.instance_of? accesseur
     @cours = []
-    @accesseur = nil
+    @accesseur = accesseur
   end  
   def cours_exsite(sigle_cours)
     return true
   end
   def assigner_accesseur( accesseur ) 
-    @accesseur = accesseur
+    
   end
   def charger_base_donnee( nom_fichier )
-    fail "Le fichier n'existe pas" unless File.file?( nom_fichier )
-    fail "Un accesseur doit etre assigne avant de charger une base de 
-          donnee" if @accesseur == nil
+    #~ fail "Un accesseur doit etre assigne avant de charger une base de 
+          #~ donnee" if @accesseur == nil
     @cours = @accesseur.charger_base_donnee( nom_fichier )
   end
   def ajouter_cours(sigle_cours)

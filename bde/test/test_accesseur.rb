@@ -39,7 +39,7 @@ describe Accesseur do
     it "charge une base de donnee" do
       @accesseur.charger_base_donnee( nom_fichier1 )
       @accesseur.collection_cours.must_equal( liste_cours )
-      mock_accesseur.verify
+      mock_format.verify
     end
   end
     
@@ -56,7 +56,8 @@ describe Accesseur do
       @accesseur.collection_cours = liste_cours }
     it "sauvegarde une base de donnee" do
       @accesseur.sauvegarder_base_donnee( nom_fichier2 )
-      File.open( nom_fichier2, "r").read.must_equal( "MATH002\n" ) 
+      File.open( nom_fichier2, "r").read.must_equal( "MATH002\n" )
+      #~ mock_format.verify 
     end
   end
 end

@@ -2,7 +2,6 @@ require 'test_helper'
 require 'bde'
 
 describe Cours do
-
   describe ".new" do
     let(:nom1) { 'CH' }
     let(:nom2) { 'CHI001' }    

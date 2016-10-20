@@ -13,9 +13,9 @@ task :default => [:run]
 task :tests => [:acceptation_tests, :tests_unitaires]
 
 task :tests_unitaires => [:test_etudiant, 
-                          :test_cours, 
-                          :test_bdCours,
-                          :test_accesseur]
+                          :test_cours,                           
+                          :test_accesseur,
+                          :test_bdCours,]
 
 task :acceptation_tests => [:acceptation_liste]
 
