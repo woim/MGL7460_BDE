@@ -9,7 +9,8 @@ class Format
       prenoms = nom_info.split(",")[1..-1]
       
       notes_info = info.split("=")[1]
-      notes = notes_info.split(",").to_f    
+      notes = notes_info.split(",")
+      notes.map!{ |x| x.to_f }    
       
       etudiant = Etudiant(nom,prenoms)
       etudiant.ajouter_note( notes )
@@ -17,6 +18,10 @@ class Format
     end  
   end  
   def ecrire_information( cours )
-  
+  	ligne = cours.sigle
+  	cours.etudiants.each do |eleve|
+	  ligne +=  "/" + eleve.nom + "," + eleve.prenoms.joim(",") + "=" \
+	                + eleve.notes.join(",")
+	end
   end  
 end
