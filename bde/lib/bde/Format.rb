@@ -1,4 +1,4 @@
-class FormatBd
+class Format
 
   def self.extraire_information( champ )
  
