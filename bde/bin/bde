@@ -21,7 +21,9 @@ subcommand_option_handling :normal
 arguments :strict
 
 # Declaration de variable
-baseDonneeCours = BdCours.new()
+format = Format.new
+accesseur = Accesseur.new(Format)
+baseDonneeCours = BdCours.new(accesseur)
 
 # desc 'Describe some switch here'
 # switch [:s,:switch]
@@ -132,6 +134,7 @@ command :moyenne do |c|
 end
 
 pre do |global,command,options,args|
+  baseDonneeCours.charger_base_donnee(".bde.txt")
   # Pre logic here
   # Return true to proceed; false to abort and not call the
   # chosen command
@@ -141,6 +144,7 @@ pre do |global,command,options,args|
 end
 
 post do |global,command,options,args|
+  baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
   # Post logic here
   # Use skips_post before a command to skip this
   # block on that command only
