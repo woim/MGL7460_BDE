@@ -15,6 +15,7 @@ task :tests => [:acceptation_tests, :tests_unitaires]
 task :tests_unitaires => [:test_etudiant, 
                           :test_cours,                           
                           :test_accesseur,
+                          :test_format,
                           :test_bdCours,]
 
 task :acceptation_tests => [:acceptation_liste]
@@ -45,7 +46,7 @@ task :test_accesseur do
 end
 
 task :test_format do
-  sh %{rake test TEST=test/test_formattage}
+  sh %{rake test TEST=test/test_format}
 end
 ########################################################################
 
