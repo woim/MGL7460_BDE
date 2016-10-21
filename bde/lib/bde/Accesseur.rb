@@ -2,8 +2,6 @@ class Accesseur
   attr_accessor :collection_cours
   attr_reader :format
   def initialize( formattage )
-    #~ fail "L'argument n'est pas de type Format" \
-      #~ unless formattage.instance_of? Format
     @collection_cours = []
     @format = formattage 
   end

@@ -3,8 +3,8 @@ require 'bde'
 
 describe Cours do
   describe ".new" do
-    let(:nom1) { 'CH' }
-    let(:nom2) { 'CHI001' }    
+    let(:nom1) { "CH" }
+    let(:nom2) { "CHI001" }    
     
     it "Test il faut initializer la class avec un nom" do
       lambda{ Cours.new }.must_raise( ArgumentError )
@@ -15,7 +15,7 @@ describe Cours do
     end
     
     it "le sigle du cours doit etre SSSDDD" do
-      cours = Cours.new(nom2)
+      cours = Cours.new( nom2 )
       cours.sigle.must_equal( "CHI001" )
     end
   end

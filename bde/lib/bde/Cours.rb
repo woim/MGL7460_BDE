@@ -3,7 +3,7 @@ class Cours
   attr_reader :etudiants
   def initialize( sigle )
     fail "Le nom du cours doit etre de format SSSDDD" \
-      unless sigle =~ /[A-Z][A-Z][A-Z]\d\d\d/
+      unless ( sigle =~ /[A-Z]{3}[0-9]{3}/ ) == 0
     @sigle = sigle
     @etudiants = []
   end
