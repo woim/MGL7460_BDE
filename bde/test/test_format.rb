@@ -10,10 +10,10 @@ describe Format do
     etudiant2 = Etudiant.new( "Thibodeau", "Jean", "Charles-Henri" )
     etudiant2.ajouter_note( [18,18,17] )
         
-    @cours = Cours.new( "MATH002" )
+    @cours = Cours.new( "MAT002" )
     @cours.ajouter_etudiant( etudiant1 )
     @cours.ajouter_etudiant( etudiant2 )
-    @champ = "MATH002/Loiseau,Martin=12.0,13.0,14.0|Thibodeau,Jean,Charles-Henri=18.0,18.0,17.0" 
+    @champ = "MAT002/Loiseau,Martin=12.0,13.0,14.0|Thibodeau,Jean,Charles-Henri=18.0,18.0,17.0" 
     
     @format = Format.new
   }
