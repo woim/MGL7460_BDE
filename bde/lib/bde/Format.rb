@@ -12,16 +12,17 @@ class Format
       notes = notes_info.split(",")
       notes.map!{ |x| x.to_f }    
       
-      etudiant = Etudiant(nom,prenoms)
+      etudiant = Etudiant.new(nom,prenoms)
       etudiant.ajouter_note( notes )
       cours.ajouter_etudiant(etudiant)
-    end  
+    end 
+    return cours 
   end  
   def ecrire_information( cours )
   	ligne = cours.sigle
   	cours.etudiants.each do |eleve|
-	  ligne +=  "/" + eleve.nom + "," + eleve.prenoms.joim(",") + "=" \
-	                + eleve.notes.join(",")
-	end
+      ligne +=  "/" + eleve.nom + "," + eleve.prenoms.joim(",") + "=" \
+                    + eleve.notes.join(",")
+    end
   end  
 end

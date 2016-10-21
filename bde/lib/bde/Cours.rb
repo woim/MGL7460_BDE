@@ -33,4 +33,8 @@ class Cours
   def afficher_moyenne(etudiant)
 		puts "afficher moyenne etudiant"
   end
+  def ==(c)
+    @sigle == c.sigle
+    @etudiants == c.etudiants
+  end
 end
