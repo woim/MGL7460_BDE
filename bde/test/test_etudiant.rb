@@ -36,7 +36,7 @@ describe Etudiant do
       @etudiant.notes.must_equal( [15] )
     end
     
-    it "ajoute des notes" do
+    it "ajoute des notes" do      
       @etudiant.ajouter_note( note )
       @etudiant.ajouter_note( notes1 )
       @etudiant.notes.must_equal( [15, 15, 16, 17] )
@@ -61,14 +61,15 @@ describe Etudiant do
     
     it "afficher les notes" do
       @etudiant.ajouter_note( notes )
-      @etudiant.afficher_notes.must_equal "15 16 17"
+      @etudiant.afficher_notes.must_equal "15.0 16.0 17.0"
     end   
   end
   
   describe "#afficher_etat_civil" do
-    before { 
+    before do 
       @etudiant1 = Etudiant.new( "Robert", "Lapin" )
-      @etudiant2 = Etudiant.new( "Robert", "Lapin", "Garou" ) }    
+      @etudiant2 = Etudiant.new( "Robert", "Lapin", "Garou" ) 
+    end
     
     it "afficher etat civil etudiant" do
       @etudiant1.afficher_etat_civil.must_equal "Robert Lapin"
@@ -76,6 +77,22 @@ describe Etudiant do
     
     it "afficher etat civil etudiant avec 2 prenoms" do
       @etudiant2.afficher_etat_civil.must_equal "Robert Lapin Garou"
+    end
+  end
+  
+  describe "#==" do
+    before do 
+      @etudiant1 = Etudiant.new( "Robert", "Lapin" )
+      @etudiant2 = Etudiant.new( "Robert", "Lapin" )
+      @etudiant3 = Etudiant.new( "Robert", "Lapin", "Garou" ) 
+    end
+    
+    it "test egalite dans le cas 2 etudiants egaux" do
+      ( @etudiant1 == @etudiant2 ) == true
+    end
+    
+    it "test egalite dans le cas 2 etudiants differents" do
+      ( @etudiant1 == @etudiant3 ) == false 
     end
   end
 end

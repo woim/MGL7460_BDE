@@ -71,5 +71,21 @@ describe Cours do
       @cours.lister_etudiants.must_equal( "Thibodeau Jean\nMartin Lucie\n" )      
     end
   end
+  
+  describe "#==" do
+    before do 
+      @cour1 = Cours.new( "CHI001" )
+      @cour2 = Cours.new( "CHI001" )
+      @cour3 = Cours.new( "CHI002" ) 
+    end
+    
+    it "test egalite dans le cas 2 etudiants egaux" do
+      ( @cour1 == @cour2 ) == true 
+    end
+    
+    it "test egalite dans le cas 2 etudiants differents" do
+      ( @cour1 == @cour3 ) == false 
+    end
+  end
 end
 
