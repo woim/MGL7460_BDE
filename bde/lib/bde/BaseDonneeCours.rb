@@ -21,7 +21,7 @@ class BdCours
     res = nil
     res = @cours[index_cours] if index_cours != nil
   end
-  def lister_cours()
+  def lister_cours
     liste = String.new
     @cours.each do |c|
       liste += c.sigle + "\n"
