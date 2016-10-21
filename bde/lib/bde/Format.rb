@@ -19,10 +19,13 @@ class Format
     return cours 
   end  
   def ecrire_information( cours )
-  	ligne = cours.sigle
+  	ligne = cours.sigle + "/" 
   	cours.etudiants.each do |eleve|
-      ligne +=  "/" + eleve.nom + "," + eleve.prenoms.joim(",") + "=" \
-                    + eleve.notes.join(",")
+      ligne +=  eleve.nom + "," + 
+                eleve.prenoms.join(",") + "=" + 
+                eleve.notes.join(",")
+      ligne += "|" if eleve != cours.etudiants[-1] 
     end
+    return ligne
   end  
 end
