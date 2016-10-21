@@ -25,10 +25,10 @@ describe Format do
     end
   end
   
-  #~ describe "#ecrire_cours_information" do
-    #~ it "ecrit l' information d'un cours dans un champ(string)" do
-      #~ champ_ecrit = @format.ecrire_information( @cours )
-      #~ @champ.must_equal( champ_ecrit )
-    #~ end
-  #~ end  
+  describe "#ecrire_cours_information" do
+    it "ecrit l' information d'un cours dans un champ(string)" do
+      champ_ecrit = @format.ecrire_information( @cours )
+      @champ.must_equal( champ_ecrit )
+    end
+  end  
 end
