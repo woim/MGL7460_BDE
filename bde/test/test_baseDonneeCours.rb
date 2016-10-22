@@ -88,7 +88,7 @@ describe BdCours do
       lambda{ @bde.ajouter_cours( "MAT002" ) }.must_raise( RuntimeError )
     end
     
-    it "souleve une erreur parce que le cours existe deja" do
+    it "ajoute un cours a la liste de la base de donnee" do
       @bde.ajouter_cours( "BIO005" )
       liste_cours << Cours.new( "BIO005" )
       @bde.cours.must_equal( lister_cours )
