@@ -8,8 +8,12 @@ class Cours
     @etudiants = []
   end
 	def lister_etudiants( arrange=false )
+    @etudiants_ordonnes = @etudiants
+    if arrange == true
+      @etudiants_ordonnes = @etudiants.sort{ |a,b| par_etat_civil(a, b) }
+    end
     liste = String.new
-    @etudiants.each do |eleve|
+    @etudiants_ordonnes.each do |eleve|
       liste += eleve.afficher_etat_civil + "\n"
     end
     return liste      
@@ -36,5 +40,15 @@ class Cours
   def ==(c)
     @sigle == c.sigle
     @etudiants == c.etudiants
+  end
+  
+  private
+  
+  def par_etat_civil( a, b )
+    if a.nom == b.nom
+      a.prenoms <=> b.prenoms
+    else
+      a.nom <=> b.nom
+    end 
   end
 end

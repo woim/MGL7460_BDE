@@ -48,13 +48,14 @@ command :liste do |c|
     arrange = options[:arrange]
     
     if cours.nil?
-      puts baseDonneeCours.lister_cours(arrange)
+      puts baseDonneeCours.lister_cours( arrange )
     else
-      if !baseDonneeCours.cours_exsite(cours)
+      if !baseDonneeCours.cours_exsite( cours )
         message = "cours: " + cours + " n\'existe pas.\n"
         puts message
       else
-        puts baseDonneeCours.selectionner_cours(cours).lister_etudiants
+        puts baseDonneeCours.selectionner_cours( cours ).
+                             lister_etudiants( arrange )
       end
     end
   end
