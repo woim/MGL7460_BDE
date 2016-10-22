@@ -90,9 +90,10 @@ describe BdCours do
     end
     
     it "ajoute un cours a la liste de la base de donnee" do
+      @bde.charger_base_donnee( "bde_test.txt" )
       @bde.ajouter_cours( "BIO005" )
       liste_cours << Cours.new( "BIO005" )
-      @bde.cours.must_equal( lister_cours )
+      @bde.cours.must_equal( liste_cours )
     end
      
   end
