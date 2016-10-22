@@ -1,8 +1,6 @@
 require 'test_helper'
 require 'bde'
 
-
-
 describe BdCours do
   let(:liste_cours ) { [Cours.new( "MAT002" ), \
                         Cours.new( "CHI005" ), \
@@ -79,5 +77,22 @@ describe BdCours do
       @bde.charger_base_donnee( "bde_test.txt" )
       ( @bde.selectionner_cours( "PHI012" ) == cours_selectionne ) == true
     end
-  end    
+  end
+  
+  describe "#ajouter_cours" do    
+    it "souleve une erreur parce que le sigle cours n'est pas correct" do
+      lambda{ @bde.ajouter_cours( "FD45" ) }.must_raise( RuntimeError )      
+    end
+    
+    it "souleve une erreur parce que le cours existe deja" do
+      lambda{ @bde.ajouter_cours( "MAT002" ) }.must_raise( RuntimeError )
+    end
+    
+    it "souleve une erreur parce que le cours existe deja" do
+      @bde.ajouter_cours( "BIO005" )
+      liste_cours << Cours.new( "BIO005" )
+      @bde.cours.must_equal( lister_cours )
+    end
+     
+  end
 end
