@@ -4,8 +4,8 @@ require 'bde'
 nom_fichier = "bde_test.txt"
 
 describe BdCours do
-  let(:liste_cours ) { [Cours.new( "MAT002"), \
-                        Cours.new( "CHI005"), \
+  let(:liste_cours ) { [Cours.new( "MAT002" ), \
+                        Cours.new( "CHI005" ), \
                         Cours.new( "PHI012" )] }
   before do
     @mock_accesseur = MiniTest::Mock.new
@@ -27,9 +27,19 @@ describe BdCours do
     end  
   end
   
+  describe "#cours_existe" do
+    it "retourne faux si le cours n'existe pas" do
+      @bde.cours_exsite( "INF017" ) == false
+    end
+    
+    it "retourne faux si le cours n'existe pas" do
+      @bde.cours_exsite( "MAT002" ) == true
+    end
+  end
+  
   describe "#lister_cours" do 
-    let(:liste_cours ) { [Cours.new( "MAT002"), \
-                          Cours.new( "CHI005"), \
+    let(:liste_cours ) { [Cours.new( "MAT002" ), \
+                          Cours.new( "CHI005" ), \
                           Cours.new( "PHI012" )] }
     before do 
       @mock_accesseur = MiniTest::Mock.new
