@@ -22,7 +22,7 @@ describe Bde do
 
     it "Envoie un message si le cours n'existe pas" do
       bde_cli( '--class=INF005 liste' ).
-        must_equal ["Ce cours n'existe pas"]
+        must_equal ["cours: INF005 n'existe pas."]
     end
     
     it "liste les etudiants de la classe MAT008" do
@@ -30,8 +30,8 @@ describe Bde do
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
     
-    it "liste les etudiants de la classe MATH00 dans l'ordre alphabetique" do
-      bde_cli( '--class=MATH002 liste -a' ).
+    it "liste les etudiants de la classe MAT008 dans l'ordre alphabetique" do
+      bde_cli( '--class=MAT008 liste -a' ).
         must_equal ['Martin Loiseau', 'Jean Charles-Henri Thibodeau']
     end
     

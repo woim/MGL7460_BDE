@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'bde'
 
-nom_fichier = "bde_test.txt"
+
 
 describe BdCours do
   let(:liste_cours ) { [Cours.new( "MAT002" ), \
@@ -9,7 +9,7 @@ describe BdCours do
                         Cours.new( "PHI012" )] }
   before do
     @mock_accesseur = MiniTest::Mock.new
-    @mock_accesseur.expect( :charger_base_donnee, liste_cours, [nom_fichier] )
+    @mock_accesseur.expect( :charger_base_donnee, liste_cours, ["bde_test.txt"] )
     @bde = BdCours.new( @mock_accesseur )
   end
 
@@ -21,7 +21,7 @@ describe BdCours do
 
   describe "#charger_base_donnee" do
     it "charge une base de donnee" do
-      @bde.charger_base_donnee( nom_fichier )
+      @bde.charger_base_donnee( "bde_test.txt" )
       @bde.cours.must_equal( liste_cours )
       @mock_accesseur.verify
     end  
@@ -29,11 +29,12 @@ describe BdCours do
   
   describe "#cours_existe" do
     it "retourne faux si le cours n'existe pas" do
-      @bde.cours_exsite( "INF017" ) == false
+      @bde.cours_exsite( "INF017" ).must_equal( false )
     end
     
-    it "retourne faux si le cours n'existe pas" do
-      @bde.cours_exsite( "MAT002" ) == true
+    it "retourne vrai si le cours existe" do
+      @bde.charger_base_donnee( "bde_test.txt" )
+      @bde.cours_exsite( "MAT002" ).must_equal( true )
     end
   end
   
@@ -43,7 +44,7 @@ describe BdCours do
                           Cours.new( "PHI012" )] }
     before do 
       @mock_accesseur = MiniTest::Mock.new
-      @mock_accesseur.expect( :charger_base_donnee, liste_cours, [nom_fichier] )
+      @mock_accesseur.expect( :charger_base_donnee, liste_cours, ["bde_test.txt"] )
       @bde = BdCours.new( @mock_accesseur )
     end
     
@@ -53,13 +54,13 @@ describe BdCours do
     end
     
     it "retourne la liste des sigles" do
-      @bde.charger_base_donnee( nom_fichier )
+      @bde.charger_base_donnee( "bde_test.txt" )
       @bde.lister_cours.must_equal "MAT002\nCHI005\nPHI012\n"
       @mock_accesseur.verify
     end
     
     it "retourne la liste des sigles ordonne alphabetiquement" do
-      @bde.charger_base_donnee( nom_fichier )
+      @bde.charger_base_donnee( "bde_test.txt" )
       @bde.lister_cours(true).must_equal "CHI005\nMAT002\nPHI012\n"
       @mock_accesseur.verify
     end
@@ -67,19 +68,15 @@ describe BdCours do
   
   describe "#selectionner_cours" do
     let(:cours_selectionne) { Cours.new( "PHI012" ) }
- 
-    #~ it "souleve une erreur si le sigle n'est pas au bon format" do
-      #~ lambda{ @bde.selectionner_cours( "lapin" ) }.must_raise( RuntimeError )
-    #~ end
-    
+     
     it "retourne nil si le cours n'existe pas" do
-      @bde.charger_base_donnee( nom_fichier )
+      @bde.charger_base_donnee( "bde_test.txt" )
       @bde.selectionner_cours( "BLA005" ).must_equal( nil )
       @mock_accesseur.verify
     end
     
     it "retourne le cours specifie par le sigle" do
-      @bde.charger_base_donnee( nom_fichier )
+      @bde.charger_base_donnee( "bde_test.txt" )
       ( @bde.selectionner_cours( "PHI012" ) == cours_selectionne ) == true
     end
   end    
