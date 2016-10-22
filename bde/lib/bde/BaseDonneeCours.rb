@@ -4,7 +4,7 @@ class BdCours
     @cours = []
     @accesseur = accesseur
   end  
-  def cours_exsite(sigle_cours)
+  def cours_exsite( sigle_cours )
     return true
   end
   def assigner_accesseur( accesseur ) 
@@ -13,17 +13,21 @@ class BdCours
   def charger_base_donnee( nom_fichier )
     @cours = @accesseur.charger_base_donnee( nom_fichier )
   end
-  def ajouter_cours(sigle_cours)
+  def ajouter_cours( sigle_cours )
       puts "ajout cours"
   end
-  def selectionner_cours(sigle_cours)
+  def selectionner_cours( sigle_cours )
     index_cours = @cours.find_index{ |c| c.sigle.to_s == sigle_cours }
     res = nil
     res = @cours[index_cours] if index_cours != nil
   end
-  def lister_cours
+  def lister_cours( arranger=false )
     liste = String.new
-    @cours.each do |c|
+    @cours_ordonne = @cours
+    if arranger == true
+      @cours_ordonne = @cours.sort{ |a,b| a.sigle <=> b.sigle }
+    end
+    @cours_ordonne.each do |c|
       liste += c.sigle + "\n"
     end
     return liste

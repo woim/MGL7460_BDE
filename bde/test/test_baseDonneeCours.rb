@@ -47,6 +47,12 @@ describe BdCours do
       @bde.lister_cours.must_equal "MAT002\nCHI005\nPHI012\n"
       @mock_accesseur.verify
     end
+    
+    it "retourne la liste des sigles ordonne alphabetiquement" do
+      @bde.charger_base_donnee( nom_fichier )
+      @bde.lister_cours(true).must_equal "CHI005\nMAT002\nPHI012\n"
+      @mock_accesseur.verify
+    end
   end
   
   describe "#selectionner_cours" do
