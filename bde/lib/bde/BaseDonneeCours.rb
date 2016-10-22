@@ -11,7 +11,7 @@ class BdCours
     @cours = @accesseur.charger_base_donnee( nom_fichier )
   end
   def ajouter_cours( sigle_cours )
-      puts "ajout cours"
+    cours_supplementaire = Cours.new( sigle_cours )
   end
   def selectionner_cours( sigle_cours )
     index_cours = index( sigle_cours ) 
