@@ -7,7 +7,7 @@ class Cours
     @sigle = sigle
     @etudiants = []
   end
-	def lister_etudiants
+	def lister_etudiants( arrange=false )
     liste = String.new
     @etudiants.each do |eleve|
       liste += eleve.afficher_etat_civil + "\n"

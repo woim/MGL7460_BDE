@@ -74,6 +74,12 @@ describe Cours do
       @cours.ajouter_etudiant( @etudiant2 )
       @cours.lister_etudiants.must_equal( "Thibodeau Jean\nMartin Lucie\n" )      
     end
+    
+    it "retourne la liste des etudiants arrangee alphabetiquement" do
+      @cours.ajouter_etudiant( @etudiant1 )
+      @cours.ajouter_etudiant( @etudiant2 )
+      @cours.lister_etudiants( true ).must_equal( "Martin Lucie\nThibodeau Jean\n" )      
+    end
   end
   
   describe "#==" do
