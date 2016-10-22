@@ -57,6 +57,9 @@ end
 task :acceptation_liste do
   sh %{rake test_acceptation TEST=test_acceptation/liste_test.rb}
 end
+task :acceptation_ajout do
+  sh %{rake test_acceptation TEST=test_acceptation/ajout_test.rb}
+end
 ########################################################################
 
 
