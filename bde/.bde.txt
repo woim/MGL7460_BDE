@@ -1,3 +1,3 @@
 MAT008/Loiseau,Martin=12,13,14|Thibodeau,Jean,Charles-Henri=18,18,17
-BIO012/Loiseau,Martin=14,10,15|Thibodeau,Jean,Charles-Henri=17,13,15
+BIO012/Thibodeau,Jean,Charles-Henri=17,13,15|Loiseau,Martin=17,19,15
 PHY018/Loiseau,Martin=17,19,15|Thibodeau,Jean,Charles-Henri=18,19,16
