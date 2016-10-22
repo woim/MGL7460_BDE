@@ -94,7 +94,19 @@ describe BdCours do
       @bde.ajouter_cours( "BIO005" )
       liste_cours << Cours.new( "BIO005" )
       @bde.cours.must_equal( liste_cours )
-    end
-     
+    end     
   end
+  
+  describe "#sauvegarder_base_donnne" do
+    before do
+      @mock_accesseur.expect( :collection_cours=, liste_cours, [liste_cours] )
+      @mock_accesseur.expect( :sauvegarder_base_donnee, nil, ["bde_test.txt"] )
+    end
+    it "charge une base de donnee" do
+      @bde.charger_base_donnee( "bde_test.txt" )
+      @bde.sauvegarder_base_donnee( "bde_test.txt" )
+      @mock_accesseur.verify
+    end
+  end
+  
 end

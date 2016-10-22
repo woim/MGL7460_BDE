@@ -12,7 +12,7 @@ class BdCours
   end
   def ajouter_cours( sigle_cours )
     cours_supplementaire = Cours.new( sigle_cours )
-    fail sigle_cours + "existe deja." if cours_existe( sigle_cours )
+    fail sigle_cours + " existe deja." if cours_existe( sigle_cours )
     @cours.push( cours_supplementaire )
   end
   def selectionner_cours( sigle_cours )
@@ -29,6 +29,10 @@ class BdCours
       liste += c.sigle + "\n"
     end
     return liste
+  end
+  def sauvegarder_base_donnee( nom_fichier )
+    @accesseur.collection_cours = @cours
+    @accesseur.sauvegarder_base_donnee( nom_fichier )
   end
   
   private 

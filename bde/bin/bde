@@ -155,7 +155,7 @@ pre do |global,command,options,args|
 end
 
 post do |global,command,options,args|
-  #baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
+  baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
   # Post logic here
   # Use skips_post before a command to skip this
   # block on that command only
