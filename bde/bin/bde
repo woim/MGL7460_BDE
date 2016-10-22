@@ -49,7 +49,7 @@ command :liste do |c|
     if sigle_cours.nil?
       puts baseDonneeCours.lister_cours( arrange )
     else
-      if !baseDonneeCours.cours_exsite( sigle_cours )
+      if !baseDonneeCours.cours_existe( sigle_cours )
         message = "cours: " + sigle_cours + " n\'existe pas.\n"
         puts message
       else

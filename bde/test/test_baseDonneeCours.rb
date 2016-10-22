@@ -27,12 +27,12 @@ describe BdCours do
   
   describe "#cours_existe" do
     it "retourne faux si le cours n'existe pas" do
-      @bde.cours_exsite( "INF017" ).must_equal( false )
+      @bde.cours_existe( "INF017" ).must_equal( false )
     end
     
     it "retourne vrai si le cours existe" do
       @bde.charger_base_donnee( "bde_test.txt" )
-      @bde.cours_exsite( "MAT002" ).must_equal( true )
+      @bde.cours_existe( "MAT002" ).must_equal( true )
     end
   end
   
@@ -85,6 +85,7 @@ describe BdCours do
     end
     
     it "souleve une erreur parce que le cours existe deja" do
+      @bde.charger_base_donnee( "bde_test.txt" )
       lambda{ @bde.ajouter_cours( "MAT002" ) }.must_raise( RuntimeError )
     end
     

@@ -4,7 +4,7 @@ class BdCours
     @cours = []
     @accesseur = accesseur
   end  
-  def cours_exsite( sigle_cours )
+  def cours_existe( sigle_cours )
     return ( index( sigle_cours ) != nil ) ? true : false
   end
   def charger_base_donnee( nom_fichier )
@@ -12,6 +12,7 @@ class BdCours
   end
   def ajouter_cours( sigle_cours )
     cours_supplementaire = Cours.new( sigle_cours )
+    fail sigle_cours + "existe deja" if cours_existe( sigle_cours )
   end
   def selectionner_cours( sigle_cours )
     index_cours = index( sigle_cours ) 
