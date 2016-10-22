@@ -58,5 +58,3 @@ end
 
 effacer_base_donnee( nom_fichier1 )
 effacer_base_donnee( nom_fichier2 )
-
-

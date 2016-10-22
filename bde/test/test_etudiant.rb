@@ -1,6 +1,8 @@
 require 'test_helper'
 require 'bde'
 
+
+
 describe Etudiant do
   describe ".new" do  
     let(:nom1) { "Thibodeau" }

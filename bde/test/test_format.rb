@@ -4,7 +4,7 @@ require 'bde'
 
 
 describe Format do
-  before {     
+  before do    
     etudiant1 = Etudiant.new( "Loiseau", "Martin" )
     etudiant1.ajouter_note( [12,13,14] )
     etudiant2 = Etudiant.new( "Thibodeau", "Jean", "Charles-Henri" )
@@ -16,7 +16,7 @@ describe Format do
     @champ = "MAT002/Loiseau,Martin=12.0,13.0,14.0|Thibodeau,Jean,Charles-Henri=18.0,18.0,17.0" 
     
     @format = Format.new
-  }
+  end
     
   describe "#extraire_cours_information" do  
     it "extrait l'information d'une ligne" do

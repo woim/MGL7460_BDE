@@ -1,6 +1,8 @@
 require 'test_helper'
 require 'bde'
 
+
+
 describe Cours do
   describe ".new" do
     let(:nom1) { "CH" }
@@ -21,9 +23,10 @@ describe Cours do
   end
     
   describe "#ajouter_etudiant" do
-  before { 
-    @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
-    @cours = Cours.new( "CHI001" ) }
+    before do 
+      @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
+      @cours = Cours.new( "CHI001" )
+    end
     
     it "test on ajoute bien un etudiant" do 
       lambda{ @cours.ajouter_etudiant( "blabla" ) }.must_raise( RuntimeError )
@@ -56,10 +59,11 @@ describe Cours do
   #~ end
   
   describe "#lister_etudiants" do
-    before { 
+    before do 
       @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
       @etudiant2 = Etudiant.new( "Martin", "Lucie" ) 
-      @cours = Cours.new( "CHI001" ) }
+      @cours = Cours.new( "CHI001" ) 
+    end
       
     it "retourne une liste vide si aucun etudiant" do
       @cours.lister_etudiants.must_equal( "" )      
