@@ -31,7 +31,7 @@ baseDonneeCours = BdCours.new(accesseur)
 
 desc 'Selectionne les cours'
 #default_value 'the default'
-arg_name 'cours'
+arg_name 'sigle_cours'
 flag [:c,:class]
 
 desc 'Liste les eleves d\'un cours / liste les cours autrement'
@@ -43,20 +43,21 @@ command :liste do |c|
   # c.default_value 'default'
   # c.flag :f
   c.action do |global_options,options,args|
-    cours = global_options[:class]
+    sigle_cours = global_options[:class]
     arrange = options[:arrange]
     
-    if cours.nil?
+    if sigle_cours.nil?
       puts baseDonneeCours.lister_cours( arrange )
     else
-      if !baseDonneeCours.cours_exsite( cours )
-        message = "cours: " + cours + " n\'existe pas.\n"
+      if !baseDonneeCours.cours_exsite( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
         puts message
       else
-        puts baseDonneeCours.selectionner_cours( cours ).
+        puts baseDonneeCours.selectionner_cours( sigle_cours ).
                              lister_etudiants( arrange )
       end
     end
+    
   end
 end
 
@@ -69,26 +70,14 @@ command :ajout do |c|
   c.flag [:p,:prenom] 
    
   c.action do |global_options,options,args|
-    cours = global_options[:class]
+    sigle_cours = global_options[:class]
     nom = options[:nom]
-    pernoms = options[:prenom]
-     
-    if cours.nil?
-      cours = Cours.new(nom)
-      if baseDonneeCours.cours_exsite( cours )
-        message = "cours: " + cours + " existe deja.\n"
-        puts message
-      else
-        baseDonneeCours.ajouter_cours( cours )
-        # Il semblerait qu' on puisse pas acceder aux arguments
-        #~ args.each do |arg|
-          #~ cours = Cours.new( arg )
-          #~ baseDonneeCours.ajouter_cours( cours )
-        #~ end        
-      end
+    prenom = options[:prenom]
+    
+    if sigle_cours.nil?
+      baseDonneeCours.ajouter_cours( nom )
     else
-      cours = baseDonneeCours.selectionner_cours( cours )
-      etudiant = Etudiant.new( nom, prenoms )
+      baseDonneeCours.selectionner_cours( sigle_cours ).ajouter_etudiant( nom, prenom )
     end
     
   end
