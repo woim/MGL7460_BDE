@@ -18,7 +18,8 @@ task :tests_unitaires => [:test_etudiant,
                           :test_format,
                           :test_bdCours,]
 
-task :acceptation_tests => [:acceptation_liste]
+task :acceptation_tests => [:acceptation_liste,
+                            :acceptation_ajout]
 
 task :run do
   sh %{bundle exec bin/bde}

@@ -35,7 +35,6 @@ arg_name 'cours'
 flag [:c,:class]
 
 desc 'Liste les eleves d\'un cours / liste les cours autrement'
-#arg_name 'Describe arguments to liste here'
 command :liste do |c|
   c.desc 'arrange la liste par ordre alphabetique'
   c.switch [:a,:arrange]
@@ -63,29 +62,35 @@ end
 
 desc 'Ajoute un eleve a un cours (format: --class=cours ajout nom prenom)'
 #arg_name 'nomEtudiant'
-command :ajout do |c|
+command :ajout do |c| 
+  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+  c.flag [:n,:nom]  
+  c.desc "Specifie le prenom de l'etudiant"
+  c.flag [:p,:prenom] 
+   
   c.action do |global_options,options,args|
-    cours    = global_options[:class]
-    #~ nom      = args.shift
-    etudiant = Etudiant.new(args.shift,args.shift)
-    
-    #~ if cours.nil?
-      #~ #rajoute un cours
-      #~ if baseDonneeCours.cours_exsite( cours )
-        #~ message = "cours: " + cours + " existe deja.\n"
-        #~ puts message
-    #~ else
-      #~ #rajoute un etudiant a un cours
-    #~ end
-      if
-      baseDonneeCours.ajouter_cours()
-    
-    if !baseDonneeCours.cours_exsite(cours)
-      message = "cours: " + cours + "n\'existe pas.\n"
-      puts message
+    cours = global_options[:class]
+    nom = options[:nom]
+    pernoms = options[:prenom]
+     
+    if cours.nil?
+      cours = Cours.new(nom)
+      if baseDonneeCours.cours_exsite( cours )
+        message = "cours: " + cours + " existe deja.\n"
+        puts message
+      else
+        baseDonneeCours.ajouter_cours( cours )
+        # Il semblerait qu' on puisse pas acceder aux arguments
+        #~ args.each do |arg|
+          #~ cours = Cours.new( arg )
+          #~ baseDonneeCours.ajouter_cours( cours )
+        #~ end        
+      end
     else
-      baseDonneeCours.selectionner_cours(cours).ajouter_etudiant(etudiant)
+      cours = baseDonneeCours.selectionner_cours( cours )
+      etudiant = Etudiant.new( nom, prenoms )
     end
+    
   end
 end
 
