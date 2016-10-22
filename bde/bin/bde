@@ -37,16 +37,18 @@ flag [:c,:class]
 desc 'Liste les eleves d\'un cours / liste les cours autrement'
 #arg_name 'Describe arguments to liste here'
 command :liste do |c|
-  # c.desc 'Describe a switch to liste'
-  # c.switch :s
+  c.desc 'arrange la liste par ordre alphabetique'
+  c.switch [:a,:arrange]
 
   # c.desc 'Describe a flag to liste'
   # c.default_value 'default'
   # c.flag :f
   c.action do |global_options,options,args|
     cours = global_options[:class]
+    arrange = options[:arrange]
+    
     if cours.nil?
-      puts baseDonneeCours.lister_cours
+      puts baseDonneeCours.lister_cours(arrange)
     else
       if !baseDonneeCours.cours_exsite(cours)
         message = "cours: " + cours + " n\'existe pas.\n"
