@@ -13,25 +13,25 @@ describe Bde do
   describe "liste" do
   
     it "liste les classes" do
-      bde_cli( 'liste' ).must_equal ['MAT008','BIO012','PHY018']
+      bde_cli( 'liste' ).must_equal ['MAT008', 'BIO012', 'PHY018']
     end
     
-    #~ it "liste les classes dans l'ordre alphabetique" do
-      #~ bde_cli( 'liste -alphabetique' ).must_equal ['CHI005','MAT002','PHI012']
-    #~ end
+    it "liste les classes dans l'ordre alphabetique" do
+      bde_cli( 'liste -a' ).must_equal ['BIO012', 'MAT008', 'PHY018']
+    end
     
     it "liste les etudiants de la classe MAT008" do
       bde_cli( '--class=MAT008 liste' ).
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
     
-    #~ it "liste les etudiants de la classe MATH00 dans l'ordre alphabetique" do
-      #~ bde_cli( '--class=MATH002 liste -alphabetique' ).
-        #~ must_equal ['Martin Loiseau', 'Jean Charles-Henri Thibodeau']
-    #~ end
+    it "liste les etudiants de la classe MATH00 dans l'ordre alphabetique" do
+      bde_cli( '--class=MATH002 liste -a' ).
+        must_equal ['Martin Loiseau', 'Jean Charles-Henri Thibodeau']
+    end
     
   end
 end
 
 # Efface la base de donnee
-#effacer_base_donnee( nom_fichier )
+effacer_base_donnee( nom_fichier )
