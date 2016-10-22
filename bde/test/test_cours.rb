@@ -16,7 +16,7 @@ describe Cours do
       lambda{ Cours.new( nom1 ) }.must_raise( RuntimeError )
     end
     
-    it "le sigle du cours doit etre SSSDDD" do
+    it "le sigle du cours est correct" do
       cours = Cours.new( nom2 )
       cours.sigle.must_equal( "CHI001" )
     end
