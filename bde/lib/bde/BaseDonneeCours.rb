@@ -12,7 +12,7 @@ class BdCours
   end
   def ajouter_cours( sigle_cours )
     cours_supplementaire = Cours.new( sigle_cours )
-    fail sigle_cours + "existe deja" if cours_existe( sigle_cours )
+    fail sigle_cours + "existe deja." if cours_existe( sigle_cours )
     @cours.push( cours_supplementaire )
   end
   def selectionner_cours( sigle_cours )
