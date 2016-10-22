@@ -16,7 +16,7 @@ end
 def bde_cli( cmd )
   # On execute la commande indiquee et on retourne un Array des lignes
   # obtenues.
-  %x{bundle exec bin/bde #{cmd}}.split("\n")
+  %x{bundle exec bin/bde #{cmd} 2>&1}.split("\n")
 end
 
 def sauvergarder_base_donnee
