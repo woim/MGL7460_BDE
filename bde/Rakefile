@@ -55,11 +55,14 @@ end
 ########################################################################
 # Test Acceptation
 ########################################################################
-task :acceptation_liste do
-  sh %{rake test_acceptation TEST=test_acceptation/liste_test.rb}
+task :acceptation_lister do
+  sh %{rake test_acceptation TEST=test_acceptation/lister_test.rb}
 end
-task :acceptation_ajout do
-  sh %{rake test_acceptation TEST=test_acceptation/ajout_test.rb}
+task :acceptation_ajouter do
+  sh %{rake test_acceptation TEST=test_acceptation/ajouter_test.rb}
+end
+task :acceptation_retirer do
+  sh %{rake test_acceptation TEST=test_acceptation/retirer_test.rb}
 end
 ########################################################################
 

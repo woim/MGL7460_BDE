@@ -36,7 +36,7 @@ flag [:c,:class]
 
 desc 'Liste les eleves d\'un cours / liste les cours autrement'
 command :lister do |c|
-  c.desc 'arrange la liste par ordre alphabetique'
+  c.desc 'arranger la liste par ordre alphabetique'
   c.switch [:a,:arranger]
 
   # c.desc 'Describe a flag to liste'
@@ -61,8 +61,7 @@ command :lister do |c|
   end
 end
 
-desc 'Ajoute un eleve a un cours (format: --class=cours ajout nom prenom)'
-#arg_name 'nomEtudiant'
+desc 'Ajouter un eleve ou un cours)'
 command :ajouter do |c| 
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
   c.flag [:n,:nom]  
@@ -89,18 +88,30 @@ command :ajouter do |c|
   end
 end
 
-desc 'Retire un etudiant d\'un cours (format: --class=cours retrait nom prenom)'
-#arg_name 'nomEtudiant'
-command :retrait do |c|
+desc 'Retirer un etudiant ou un cours'
+command :retirer do |c|
+  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+  c.flag [:n,:nom]  
+  c.desc "Specifie le prenom de l'etudiant"
+  c.flag [:p,:prenom] 
+   
   c.action do |global_options,options,args|
-    cours    = global_options[:class]
-    etudiant = Etudiant.new(args.shift,args.shift)
-    if !baseDonneeCours.cours_exsite(cours)
-      message = "cours: " + cours + "n\'existe pas.\n"
-      puts message
+    sigle_cours = global_options[:class]
+    nom = options[:nom]
+    prenom = options[:prenom]
+    
+    if sigle_cours.nil?
+      baseDonneeCours.retirer_cours( nom )
     else
-      baseDonneeCours.selectionner_cours(cours).retirer_etudiant(etudiant)
+      if !baseDonneeCours.cours_existe( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
+        puts message
+      else
+        baseDonneeCours.selectionner_cours( sigle_cours ).
+                        retirer_etudiant( Etudiant.new( nom, prenom ) )
+      end
     end
+    
   end
 end
 
