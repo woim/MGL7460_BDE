@@ -26,9 +26,9 @@ describe Bde do
       effacer_base_donnee( nom_fichier )
     end
     
-    it "retirer un cours qui existe deja" do
+    it "retirer un cours qui n'existe pas" do
       bde_cli( 'retirer -n MAT008' ).
-        must_equal( ["error: MAT008 existe deja."] )
+        must_equal( ["error: MAT008 n'existe pas."] )
       effacer_base_donnee( nom_fichier )
     end
     
