@@ -32,7 +32,7 @@ class Cours
       if !@etudiants.include?( etudiant )
     @etudiants.delete( etudiant )
 	end
-  def afficher_evaluation(etudiant)
+  def lister_evaluations
 		puts "afficher evalaution etudiant"
 	end
   def saisir_evaluation(etudiant,note)
