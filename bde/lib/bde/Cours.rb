@@ -26,9 +26,7 @@ class Cours
     @etudiants.push( etudiant )
 	end
   def retirer_etudiant(etudiant)
-    fail "L'argument n'est pas de type etudiant" \
-      unless etudiant.instance_of? Etudiant
-      puts "retirer etudiant"
+
 	end
   def afficher_evaluation(etudiant)
 		puts "afficher evalaution etudiant"

@@ -43,6 +43,28 @@ describe Cours do
     end
   end
   
+  describe "#retirer_etudiant" do
+    before do 
+      @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
+      @cours = Cours.new( "CHI001" )
+    end
+    
+    it "test on retire bien un etudiant" do 
+      lambda{ @cours.retirer_etudiant( "blabla" ) }.must_raise( RuntimeError )
+    end
+    
+    it "test si etudiant n'existe pas" do
+      @cours.ajouter_etudiant( @etudiant1 )
+      lambda{ @cours.retirer_etudiant( @etudiant1 ) }.must_raise( RuntimeError )
+    end
+
+    it "test on retire un etudiant" do 
+      @cours.ajouter_etudiant( @etudiant1 )
+      @cours.retirer_etudiant( @etudiant1 )
+      @cours.etudiants.must_be_empty
+    end
+  end
+  
   describe "#lister_etudiants" do
     before do 
       @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
