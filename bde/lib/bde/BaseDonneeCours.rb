@@ -22,9 +22,7 @@ class BdCours
   def lister_cours( arranger=false )
     liste = String.new
     @cours_ordonne = @cours
-    if arranger == true
-      @cours_ordonne = @cours.sort{ |a,b| a.sigle <=> b.sigle }
-    end
+    @cours_ordonne = @cours.sort{ |a,b| a.sigle <=> b.sigle } if arranger == true
     @cours_ordonne.each do |c|
       liste += c.sigle + "\n"
     end

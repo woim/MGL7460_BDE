@@ -18,8 +18,7 @@ describe Accesseur do
     let(:liste_cours ) { [Cours.new( "MAT002" ), \
                           Cours.new( "CHI005" ), \
                           Cours.new( "PHY004" )] }
-    before do 
-      creer_base_donnee( base_donnee_test, nom_fichier1 )
+    before do  
       @mock_format = MiniTest::Mock.new
       liste_cours.each do |cours|
         @mock_format.expect( :extraire_information, cours, [cours.sigle+"\n"] )
@@ -28,9 +27,11 @@ describe Accesseur do
     end
     
     it "charge une base de donnee" do
+      creer_base_donnee( base_donnee_test, nom_fichier1 )
       @accesseur.charger_base_donnee( nom_fichier1 )
       @accesseur.collection_cours.must_equal( liste_cours )
       @mock_format.verify
+      effacer_base_donnee( nom_fichier1 )
     end
   end
     
@@ -52,9 +53,8 @@ describe Accesseur do
       @accesseur.sauvegarder_base_donnee( nom_fichier2 )
       File.open( nom_fichier2, "r" ).read.must_equal( "MAT002\nMAT002\nMAT002\n" )
       @mock_format.verify 
+      effacer_base_donnee( nom_fichier1 )
+      effacer_base_donnee( nom_fichier2 )
     end
   end
 end
-
-effacer_base_donnee( nom_fichier1 )
-effacer_base_donnee( nom_fichier2 )
