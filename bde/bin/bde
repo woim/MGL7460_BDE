@@ -35,26 +35,26 @@ arg_name 'sigle_cours'
 flag [:c,:class]
 
 desc 'Liste les eleves d\'un cours / liste les cours autrement'
-command :liste do |c|
+command :lister do |c|
   c.desc 'arrange la liste par ordre alphabetique'
-  c.switch [:a,:arrange]
+  c.switch [:a,:arranger]
 
   # c.desc 'Describe a flag to liste'
   # c.default_value 'default'
   # c.flag :f
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
-    arrange = options[:arrange]
+    arrange = options[:arranger]
     
     if sigle_cours.nil?
-      puts baseDonneeCours.lister_cours( arrange )
+      puts baseDonneeCours.lister_cours( arranger )
     else
       if !baseDonneeCours.cours_existe( sigle_cours )
         message = "cours: " + sigle_cours + " n\'existe pas.\n"
         puts message
       else
         puts baseDonneeCours.selectionner_cours( sigle_cours ).
-                             lister_etudiants( arrange )
+                             lister_etudiants( arranger )
       end
     end
     
@@ -63,7 +63,7 @@ end
 
 desc 'Ajoute un eleve a un cours (format: --class=cours ajout nom prenom)'
 #arg_name 'nomEtudiant'
-command :ajout do |c| 
+command :ajouter do |c| 
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
   c.flag [:n,:nom]  
   c.desc "Specifie le prenom de l'etudiant"
