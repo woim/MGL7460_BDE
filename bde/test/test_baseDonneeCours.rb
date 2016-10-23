@@ -121,8 +121,8 @@ describe BdCours do
     
     it "retier un cours de la liste de la base de donnee" do
       @bde.charger_base_donnee( "bde_test.txt" )
-      liste_cours.delete( Cours.new( "CHI005" ) )
-      @bde.retirer_cours( "CHI005" )      
+      @bde.retirer_cours( "CHI005" )  
+      liste_cours.delete( Cours.new( "CHI005" ) )    
       @bde.cours.must_equal( liste_cours )
     end     
   end

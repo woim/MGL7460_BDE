@@ -34,7 +34,11 @@ class BdCours
     @accesseur.collection_cours = @cours
     @accesseur.sauvegarder_base_donnee( nom_fichier )
   end
-  
+  def retirer_cours( sigle_cours )
+    cours_effacer = Cours.new( sigle_cours )
+    fail sigle_cours + " n' existe pas." if !cours_existe( sigle_cours )
+    @cours.delete( cours_effacer )
+  end
   private 
   
   def index( sigle_cours )
