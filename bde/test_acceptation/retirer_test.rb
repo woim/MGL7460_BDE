@@ -42,9 +42,9 @@ describe Bde do
       effacer_base_donnee( nom_fichier )
     end
     
-    it "retirer un etudiant qui n'existe deja" do
+    it "retirer un etudiant qui n'existe pas" do
       bde_cli( '--class=MAT008 retirer -n Loiseau -p Martin' ).
-        must_equal( ["error: Loiseau Martin n'existe deja."] )
+        must_equal( ["error: Loiseau Martin n'existe pas."] )
       effacer_base_donnee( nom_fichier )
     end
     
