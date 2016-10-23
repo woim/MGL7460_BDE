@@ -108,5 +108,23 @@ describe BdCours do
       @mock_accesseur.verify
     end
   end
+
+  describe "#retirer_cours" do    
+    it "souleve une erreur parce que le sigle cours n'est pas correct" do
+      lambda{ @bde.retirer_cours( "FD45" ) }.must_raise( RuntimeError )      
+    end
+    
+    it "souleve une erreur parce que le cours n'existe deja" do
+      @bde.charger_base_donnee( "bde_test.txt" )
+      lambda{ @bde.retirer_cours( "INF004" ) }.must_raise( RuntimeError )
+    end
+    
+    it "retier un cours de la liste de la base de donnee" do
+      @bde.charger_base_donnee( "bde_test.txt" )
+      liste_cours.delete( Cours.new( "CHI005" ) )
+      @bde.retirer_cours( "CHI005" )      
+      @bde.cours.must_equal( liste_cours )
+    end     
+  end
   
 end
