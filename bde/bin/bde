@@ -117,15 +117,9 @@ end
 
 desc 'Liste les evaluations'
 command :obtenir_eval do |c|
-  c.desc "Specifie le nom de l'item (cours ou etudiant)"
-  c.flag [:n,:nom]  
-  c.desc "Specifie le prenom de l'etudiant"
-  c.flag [:p,:prenom] 
    
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
-    nom = options[:nom]
-    prenom = options[:prenom]
     
     if sigle_cours.nil?
       puts "une class doit etre selectionnee."
