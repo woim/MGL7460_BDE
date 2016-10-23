@@ -67,6 +67,9 @@ end
 task :acceptation_obtenir do
   sh %{rake test_acceptation TEST=test_acceptation/obtenir_test.rb}
 end
+task :acceptation_saisir do
+  sh %{rake test_acceptation TEST=test_acceptation/saisir_test.rb}
+end
 ########################################################################
 
 

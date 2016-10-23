@@ -12,7 +12,6 @@ nom_fichier = ".bde.txt"
 
 describe Bde do
   describe "obtenir_eval" do
-    before{ creer_base_donnee( base_donnee_test, nom_fichier ) }
     
     it "obtenir evaluation sans classe" do
       creer_base_donnee( base_donnee_test, nom_fichier )

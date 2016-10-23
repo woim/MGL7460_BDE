@@ -140,12 +140,15 @@ command :saisir_eval do |c|
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
   c.flag [:n,:nom]  
   c.desc "Specifie le prenom de l'etudiant"
-  c.flag [:p,:prenom] 
+  c.flag [:p,:prenom]
+  c.desc "Specifie les notes de l'etudiant"
+  c.flag [:e,:eval] 
    
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
+    notes = options[:eval].to_f
     
     if sigle_cours.nil?
       puts "une classe doit etre selectionnee."
@@ -154,10 +157,8 @@ command :saisir_eval do |c|
         message = "cours: " + sigle_cours + " n\'existe pas.\n"
         puts message
       else
-        puts "Veuillez saisir notes: "
-        notes_saisies = gets.chomp 
         baseDonneeCours.selectionner_cours( sigle_cours ).
-                        saisir_evulations( Etudiant.new( nom, prenom ), notes )
+                        saisir_eval( Etudiant.new( nom, prenom ), notes )
       end
     end
     
