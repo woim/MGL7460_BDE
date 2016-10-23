@@ -135,8 +135,23 @@ describe Cours do
     it "test on ajoute des notes a l'etudiant" do
       @cours.saisir_eval( @etudiant1, notes )
       @cours.etudiants[0].notes.must_equal( notes )
-    end
-    
+    end    
   end
+  
+  describe "#lister_moyenne" do 
+     before do 
+      @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
+      @etudiant1.ajouter_note( [13.0, 14.0, 15.0] )
+      @etudiant2 = Etudiant.new( "Martin", "Lucie" ) 
+      @cours = Cours.new( "CHI001" )
+      @cours.ajouter_etudiant( @etudiant1 )
+      @cours.ajouter_etudiant( @etudiant2 )
+    end
+    it "liste moyenne etudiant" do
+      @cours.lister_evaluations.split("\n").
+        must_equal( ["Thibodeau Jean: 14.0","Martin Lucie: "] )
+    end
+  end
+  
 end
 
