@@ -36,8 +36,8 @@ class BdCours
   end
   def retirer_cours( sigle_cours )
     cours_effacer = Cours.new( sigle_cours )
-    fail sigle_cours + " n' existe pas." if !cours_existe( sigle_cours )
-    @cours.delete( cours_effacer )
+    fail sigle_cours + " n'existe pas." if !cours_existe( sigle_cours )
+    @cours.delete_at( index( sigle_cours ) )
   end
   private 
   
