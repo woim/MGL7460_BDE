@@ -17,7 +17,7 @@ describe Bde do
     it "obtenir evaluation sans classe" do
       creer_base_donnee( base_donnee_test, nom_fichier )
       bde_cli( 'obtenir_eval' ).
-        must_equal( ["Must select a class."] )
+        must_equal( ["une class doit etre selectionnee."] )
       effacer_base_donnee( nom_fichier )
     end
     

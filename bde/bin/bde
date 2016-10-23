@@ -128,14 +128,13 @@ command :obtenir_eval do |c|
     prenom = options[:prenom]
     
     if sigle_cours.nil?
-      puts "Must select a class."
+      puts "une class doit etre selectionnee."
     else
       if !baseDonneeCours.cours_existe( sigle_cours )
         message = "cours: " + sigle_cours + " n\'existe pas.\n"
         puts message
       else
-        baseDonneeCours.selectionner_cours( sigle_cours ).
-                        lister_evaluation
+        puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_evaluations
       end
     end
     
