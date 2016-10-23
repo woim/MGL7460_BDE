@@ -50,6 +50,12 @@ describe Bde do
       effacer_base_donnee( nom_fichier )
     end
     
+    it "ajouter un etudiant sur un cours qui n'existe pas" do
+      bde_cli( '--class=INF005 ajout -n Loiseau -p Martin' ).
+        must_equal( ["cours: INF005 n'existe pas."] )
+      effacer_base_donnee( nom_fichier )
+    end
+    
     it "ajouter un etudiant" do
       nouvelle_base_donnee = [
         "MAT008/Loiseau,Martin=12,13,14|Thibodeau,Jean,Charles-Henri=18,18,17|Loup,Garou",

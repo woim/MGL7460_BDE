@@ -44,7 +44,7 @@ command :lister do |c|
   # c.flag :f
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
-    arrange = options[:arranger]
+    arranger = options[:arranger]
     
     if sigle_cours.nil?
       puts baseDonneeCours.lister_cours( arranger )
@@ -77,8 +77,13 @@ command :ajouter do |c|
     if sigle_cours.nil?
       baseDonneeCours.ajouter_cours( nom )
     else
-      baseDonneeCours.selectionner_cours( sigle_cours ).
-                      ajouter_etudiant( Etudiant.new( nom, prenom ) )
+      if !baseDonneeCours.cours_existe( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
+        puts message
+      else
+        baseDonneeCours.selectionner_cours( sigle_cours ).
+                        ajouter_etudiant( Etudiant.new( nom, prenom ) )
+      end
     end
     
   end
