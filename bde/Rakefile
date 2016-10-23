@@ -64,6 +64,9 @@ end
 task :acceptation_retirer do
   sh %{rake test_acceptation TEST=test_acceptation/retirer_test.rb}
 end
+task :acceptation_obtenir do
+  sh %{rake test_acceptation TEST=test_acceptation/retirer_test.rb}
+end
 ########################################################################
 
 
