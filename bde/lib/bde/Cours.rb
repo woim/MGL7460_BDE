@@ -26,7 +26,11 @@ class Cours
     @etudiants.push( etudiant )
 	end
   def retirer_etudiant(etudiant)
-
+    fail "L'argument n'est pas de type etudiant" \
+      unless etudiant.instance_of? Etudiant
+    fail etudiant.afficher_etat_civil + " n'existe pas." \
+      if !@etudiants.include?( etudiant )
+    @etudiants.delete( etudiant )
 	end
   def afficher_evaluation(etudiant)
 		puts "afficher evalaution etudiant"

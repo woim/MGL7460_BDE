@@ -54,7 +54,6 @@ describe Cours do
     end
     
     it "test si etudiant n'existe pas" do
-      @cours.ajouter_etudiant( @etudiant1 )
       lambda{ @cours.retirer_etudiant( @etudiant1 ) }.must_raise( RuntimeError )
     end
 
