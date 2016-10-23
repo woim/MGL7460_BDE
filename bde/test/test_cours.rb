@@ -132,7 +132,7 @@ describe Cours do
       lambda{ @cours.saisir_eval( @etudiant2, notes ) }.must_raise( RuntimeError )
     end
     
-    it "test on ajoute des notes a l'etudiant" do      
+    it "test on ajoute des notes a l'etudiant" do
       @cours.saisir_eval( @etudiant1, notes )
       @cours.etudiants[0].notes.must_equal( notes )
     end
