@@ -38,8 +38,13 @@ class Cours
     index = @etudiants.find_index( etudiant )
     @etudiants[index].ajouter_note( note )
 	end
-  def afficher_moyenne(etudiant)
-		puts "afficher moyenne etudiant"
+  def lister_moyenne
+    eval = String.new
+    @etudiants.each do |eleve|
+      moyenne = calculer_moyenne( eleve.notes )
+      eval += eleve.afficher_etat_civil + ": " + moyenne.to_s + "\n" 
+    end
+    return eval
   end
   def ==(c)
     @sigle == c.sigle
@@ -58,7 +63,13 @@ class Cours
   def test_etudiant( etudiant, condition, message )
     fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
-    fail etudiant.afficher_etat_civil + message if condition #!@etudiants.include?( etudiant )
+    fail etudiant.afficher_etat_civil + message if condition
   end
-  
+  def calculer_moyenne( notes )
+    return nil if notes.size == 0 
+    somme = 0
+    notes.each{ |n| somme += n }
+    somme /= notes.size
+    return somme
+  end  
 end

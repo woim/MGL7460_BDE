@@ -16,7 +16,7 @@ describe Bde do
     it "obtenir moyenne sans classe" do
       creer_base_donnee( base_donnee_test, nom_fichier )
       bde_cli( 'moyenne' ).
-        must_equal( ["une class doit etre selectionnee."] )
+        must_equal( ["une classe doit etre selectionnee."] )
       effacer_base_donnee( nom_fichier )
     end
     

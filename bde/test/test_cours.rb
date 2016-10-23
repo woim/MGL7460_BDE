@@ -4,6 +4,7 @@ require 'bde'
 
 
 describe Cours do
+
   describe ".new" do
     let(:nom1) { "CH" }
     let(:nom2) { "CHI001" }    
@@ -148,7 +149,7 @@ describe Cours do
       @cours.ajouter_etudiant( @etudiant2 )
     end
     it "liste moyenne etudiant" do
-      @cours.lister_evaluations.split("\n").
+      @cours.lister_moyenne.split("\n").
         must_equal( ["Thibodeau Jean: 14.0","Martin Lucie: "] )
     end
   end

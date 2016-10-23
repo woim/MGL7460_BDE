@@ -26,11 +26,7 @@ accesseur = Accesseur.new(format)
 baseDonneeCours = BdCours.new(accesseur)
 
 
-# desc 'Describe some switch here'
-# switch [:s,:switch]
-
 desc 'Selectionne les cours'
-#default_value 'the default'
 arg_name 'sigle_cours'
 flag [:c,:class]
 
@@ -39,9 +35,6 @@ command :lister do |c|
   c.desc 'arranger la liste par ordre alphabetique'
   c.switch [:a,:arranger]
 
-  # c.desc 'Describe a flag to liste'
-  # c.default_value 'default'
-  # c.flag :f
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     arranger = options[:arranger]
@@ -166,7 +159,6 @@ command :saisir_eval do |c|
 end
 
 desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)'
-#arg_name 'Describe arguments to moyenne here'
 command :moyenne do |c|
   
   c.action do |global_options,options,args|
