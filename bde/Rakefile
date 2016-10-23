@@ -18,8 +18,12 @@ task :tests_unitaires => [:test_etudiant,
                           :test_format,
                           :test_bdCours,]
 
-task :acceptation_tests => [:acceptation_liste,
-                            :acceptation_ajout]
+task :acceptation_tests => [:acceptation_lister,
+                            :acceptation_ajouter,
+                            :acceptation_retirer,
+                            :acceptation_obtenir,
+                            :acceptation_saisir,
+                            :acceptation_moyenner]
 
 task :run do
   sh %{bundle exec bin/bde}
@@ -69,6 +73,9 @@ task :acceptation_obtenir do
 end
 task :acceptation_saisir do
   sh %{rake test_acceptation TEST=test_acceptation/saisir_test.rb}
+end
+task :acceptation_moyenner do
+  sh %{rake test_acceptation TEST=test_acceptation/moyenner_test.rb}
 end
 ########################################################################
 

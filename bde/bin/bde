@@ -131,7 +131,7 @@ command :obtenir_eval do |c|
         puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_evaluations
       end
     end
-    
+        
   end
 end
 
@@ -168,33 +168,30 @@ end
 desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)'
 #arg_name 'Describe arguments to moyenne here'
 command :moyenne do |c|
+  
   c.action do |global_options,options,args|
-    cours    = global_options[:class]
-    etudiant = Etudiant.new(args.shift,args.shift)
-    if !baseDonneeCours.cours_exsite(cours)
-      message = "cours: " + cours + "n\'existe pas.\n"
-      puts message
+    sigle_cours = global_options[:class]
+    
+    if sigle_cours.nil?
+      puts "une classe doit etre selectionnee."
     else
-      baseDonneeCours.selectionner_cours(cours).afficher_moyenne(etudiant)
+      if !baseDonneeCours.cours_existe( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
+        puts message
+      else
+        puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_moyenne
+      end
     end
   end
 end
 
 pre do |global,command,options,args|
   baseDonneeCours.charger_base_donnee(".bde.txt")
-  # Pre logic here
-  # Return true to proceed; false to abort and not call the
-  # chosen command
-  # Use skips_pre before a command to skip this block
-  # on that command only
   true
 end
 
 post do |global,command,options,args|
   baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
-  # Post logic here
-  # Use skips_post before a command to skip this
-  # block on that command only
 end
 
 on_error do |exception|
