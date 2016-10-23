@@ -31,32 +31,17 @@ describe Cours do
     it "test on ajoute bien un etudiant" do 
       lambda{ @cours.ajouter_etudiant( "blabla" ) }.must_raise( RuntimeError )
     end
+    
+    it "test si etudiant existe deja" do
+      @cours.ajouter_etudiant( @etudiant1 )
+      lambda{ @cours.ajouter_etudiant( @etudiant1 ) }.must_raise( RuntimeError )
+    end
 
     it "test on ajoute un etudiant" do 
       @cours.ajouter_etudiant( @etudiant1 )
       @cours.etudiants.must_equal( [@etudiant1] )
     end
   end
-  
-  #~ describe "#retirer_etudiant" do
-    #~ before { 
-      #~ @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
-      #~ @cours = Cours.new("CHI001") }
-    #~ it "test on retire bien un etudiant" do 
-      #~ lambda{ @cours.retirer_etudiant( "blabla" ) }.must_raise( RuntimeError )
-    #~ end
-
-    #~ it "test on retire un etudiant" do 
-      #~ @cours.ajouter_etudiant( @etudiant1 )
-      #~ @cours.retirer_etudiant( @etudiant1 )
-      #~ @cours.etudiants.mut_be_empty
-    #~ end
-    
-    #~ it "test on retire un etudiant" do 
-      #~ @cours.retirer_etudiant( @etudiant1 )
-      #~ @cours.etudiants.mut_be_empty
-    #~ end
-  #~ end
   
   describe "#lister_etudiants" do
     before do 

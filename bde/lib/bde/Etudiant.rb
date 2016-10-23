@@ -24,6 +24,5 @@ class Etudiant
   def ==(e)
     @nom == e.nom
     @prenoms == e.prenoms
-    @notes == e.notes
   end
 end

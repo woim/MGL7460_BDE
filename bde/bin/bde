@@ -77,7 +77,8 @@ command :ajout do |c|
     if sigle_cours.nil?
       baseDonneeCours.ajouter_cours( nom )
     else
-      baseDonneeCours.selectionner_cours( sigle_cours ).ajouter_etudiant( nom, prenom )
+      baseDonneeCours.selectionner_cours( sigle_cours ).
+                      ajouter_etudiant( Etudiant.new( nom, prenom ) )
     end
     
   end

@@ -22,8 +22,8 @@ class Format
   	ligne = cours.sigle + "/" 
   	cours.etudiants.each do |eleve|
       ligne +=  eleve.nom + "," + 
-                eleve.prenoms.join(",") + "=" + 
-                eleve.notes.join(",")
+                eleve.prenoms.join(",")
+      ligne += "=" +  eleve.notes.join(",") if !eleve.notes.empty?
       ligne += "|" if eleve != cours.etudiants[-1] 
     end
     return ligne

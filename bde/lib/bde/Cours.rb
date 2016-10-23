@@ -18,10 +18,12 @@ class Cours
     end
     return liste      
   end
-	def ajouter_etudiant(etudiant)
+	def ajouter_etudiant( etudiant )
 		fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
-    @etudiants.push(etudiant)
+    fail etudiant.afficher_etat_civil + " existe deja." \
+      if @etudiants.include?( etudiant )
+    @etudiants.push( etudiant )
 	end
   def retirer_etudiant(etudiant)
     fail "L'argument n'est pas de type etudiant" \

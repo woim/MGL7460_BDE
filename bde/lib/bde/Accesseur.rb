@@ -15,7 +15,9 @@ class Accesseur
   def sauvegarder_base_donnee( nom_fichier )
     File.open( nom_fichier, "w" ) do |fich|
       @cours.each do |c|
-        fich.puts @format.ecrire_information( c ) + "\n"
+        ligne = @format.ecrire_information( c )
+        ligne += "\n" if c != @cours[-1]
+        fich.puts ligne
       end
     end
   end

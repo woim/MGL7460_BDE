@@ -42,7 +42,7 @@ describe Bde do
     
     it "ajoute un etudiant qui existe deja" do
       bde_cli( '--class=MAT008 ajout -n Loiseau -p Martin' ).
-        must_equal( ["cours MAT008 / etudiant: Loiseau Martin existe deja.\n"] )
+        must_equal( ["error: Loiseau Martin existe deja."] )
     end
     
     it "ajoute un etudiant" do
