@@ -103,5 +103,20 @@ describe Cours do
       ( @cour1 == @cour3 ) == false 
     end
   end
+  
+  describe "#lister_evaluations" do 
+    before do 
+      @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
+      @etudiant1.ajouter_note( [12.0, 14.0, 15.0] )
+      @etudiant2 = Etudiant.new( "Martin", "Lucie" ) 
+      @cours = Cours.new( "CHI001" )
+      @cours.ajouter_etudiant( @etudiant1 )
+      @cours.ajouter_etudiant( @etudiant2 )
+    end
+    it "liste evaluation etudiant" do
+      @cours.lister_evaluations.split("\n").
+        must_equal( ["Thibodeau Jean: 12.0 14.0 15.0","Martin Lucie: "] )
+    end
+  end
 end
 

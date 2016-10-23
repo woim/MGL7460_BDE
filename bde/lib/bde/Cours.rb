@@ -33,7 +33,11 @@ class Cours
     @etudiants.delete( etudiant )
 	end
   def lister_evaluations
-		puts "afficher evalaution etudiant"
+		eval = String.new
+    @etudiants.each do |eleve|
+      eval += eleve.afficher_etat_civil + ": " + eleve.afficher_notes + "\n" 
+    end
+    return eval
 	end
   def saisir_evaluation(etudiant,note)
 		puts "saisir evaluation etudiant"	

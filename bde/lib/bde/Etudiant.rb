@@ -19,7 +19,7 @@ class Etudiant
     @notes.join(" ")    
   end
   def afficher_etat_civil
-    return @nom + " " + @prenoms.join(" ")
+    @nom + " " + @prenoms.join(" ")
   end
   def ==(e)
     @nom == e.nom
