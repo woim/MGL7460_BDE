@@ -118,5 +118,25 @@ describe Cours do
         must_equal( ["Thibodeau Jean: 12.0 14.0 15.0","Martin Lucie: "] )
     end
   end
+  
+  describe "#saisir_eval" do 
+    let(:notes) { [15.0, 16.0] }
+    before do 
+      @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
+      @etudiant2 = Etudiant.new( "Martin", "Lucie" ) 
+      @cours = Cours.new( "CHI001" )
+      @cours.ajouter_etudiant( @etudiant1 )
+    end
+    
+    it "test si etudiant n'existe pas" do      
+      lambda{ @cours.saisir_eval( @etudiant2, notes ) }.must_raise( RuntimeError )
+    end
+    
+    it "test on ajoute des notes a l'etudiant" do      
+      @cours.saisir_eval( @etudiant1, notes )
+      @cours.etudiants[0].notes.must_equal( notes )
+    end
+    
+  end
 end
 

@@ -19,13 +19,15 @@ class Cours
     return liste      
   end
 	def ajouter_etudiant( etudiant )
+    #~ test_etudiant( etudiant, " existe deja." )
 		fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
     fail etudiant.afficher_etat_civil + " existe deja." \
       if @etudiants.include?( etudiant )
     @etudiants.push( etudiant )
 	end
-  def retirer_etudiant(etudiant)
+  def retirer_etudiant( etudiant )
+    #~ test_etudiant( etudiant, " n'existe pas." )
     fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
     fail etudiant.afficher_etat_civil + " n'existe pas." \
@@ -39,7 +41,7 @@ class Cours
     end
     return eval
 	end
-  def saisir_evaluation(etudiant,note)
+  def saisir_evaluation( etudiant, note )
 		puts "saisir evaluation etudiant"	
 	end
   def afficher_moyenne(etudiant)
@@ -59,4 +61,10 @@ class Cours
       a.nom <=> b.nom
     end 
   end
+  #~ def test_etudiant( etudiant, message )
+    #~ fail "L'argument n'est pas de type etudiant" \
+      #~ unless etudiant.instance_of? Etudiant
+    #~ fail etudiant.afficher_etat_civil + message \
+      #~ if !@etudiants.include?( etudiant )
+  #~ end
 end

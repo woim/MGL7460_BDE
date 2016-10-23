@@ -122,7 +122,7 @@ command :obtenir_eval do |c|
     sigle_cours = global_options[:class]
     
     if sigle_cours.nil?
-      puts "une class doit etre selectionnee."
+      puts "une classe doit etre selectionnee."
     else
       if !baseDonneeCours.cours_existe( sigle_cours )
         message = "cours: " + sigle_cours + " n\'existe pas.\n"
@@ -135,19 +135,32 @@ command :obtenir_eval do |c|
   end
 end
 
-desc 'Saisit une evaluation pour un eleve (format: --class=cours saisirEvaluation nom prenom note)'
-#arg_name 'Describe arguments to evaluation here'
-command :saisirEvaluation do |c|  
+desc 'Saisit une evaluation pour un eleve '
+command :saisir_eval do |c|  
+  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+  c.flag [:n,:nom]  
+  c.desc "Specifie le prenom de l'etudiant"
+  c.flag [:p,:prenom] 
+   
   c.action do |global_options,options,args|
-    cours    = global_options[:class]
-    etudiant = Etudiant.new(args.shift,args.shift)
-    note     = 12#arg.shift
-    if !baseDonneeCours.cours_exsite(cours)
-      message = "cours: " + cours + "n\'existe pas.\n"
-      puts message
+    sigle_cours = global_options[:class]
+    nom = options[:nom]
+    prenom = options[:prenom]
+    
+    if sigle_cours.nil?
+      puts "une classe doit etre selectionnee."
     else
-      baseDonneeCours.selectionner_cours(cours).saisir_evaluation(etudiant,note)
+      if !baseDonneeCours.cours_existe( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
+        puts message
+      else
+        puts "Veuillez saisir notes: "
+        notes_saisies = gets.chomp 
+        baseDonneeCours.selectionner_cours( sigle_cours ).
+                        saisir_evulations( Etudiant.new( nom, prenom ), notes )
+      end
     end
+    
   end
 end
 
