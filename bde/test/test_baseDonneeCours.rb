@@ -114,7 +114,7 @@ describe BdCours do
       lambda{ @bde.retirer_cours( "FD45" ) }.must_raise( RuntimeError )      
     end
     
-    it "souleve une erreur parce que le cours n'existe deja" do
+    it "souleve une erreur parce que le cours n'existe pas" do
       @bde.charger_base_donnee( "bde_test.txt" )
       lambda{ @bde.retirer_cours( "INF004" ) }.must_raise( RuntimeError )
     end
