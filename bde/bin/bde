@@ -115,18 +115,30 @@ command :retirer do |c|
   end
 end
 
-desc 'Liste les evaluations pour un eleve (format: --class=cours obtenirEvaluation nom prenom)'
-#arg_name 'Describe arguments to evaluation here'
-command :obtenirEvaluation do |c|
+desc 'Liste les evaluations'
+command :obtenir_eval do |c|
+  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+  c.flag [:n,:nom]  
+  c.desc "Specifie le prenom de l'etudiant"
+  c.flag [:p,:prenom] 
+   
   c.action do |global_options,options,args|
-    cours    = global_options[:class]
-    etudiant = Etudiant.new(args.shift,args.shift)
-    if !baseDonneeCours.cours_exsite(cours)
-      message = "cours: " + cours + "n\'existe pas.\n"
-      puts message
+    sigle_cours = global_options[:class]
+    nom = options[:nom]
+    prenom = options[:prenom]
+    
+    if sigle_cours.nil?
+      puts "Must select a class."
     else
-      baseDonneeCours.selectionner_cours(cours).afficher_evaluation(etudiant)
+      if !baseDonneeCours.cours_existe( sigle_cours )
+        message = "cours: " + sigle_cours + " n\'existe pas.\n"
+        puts message
+      else
+        baseDonneeCours.selectionner_cours( sigle_cours ).
+                        lister_evaluation
+      end
     end
+    
   end
 end
 
