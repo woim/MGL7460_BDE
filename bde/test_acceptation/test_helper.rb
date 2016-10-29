@@ -3,6 +3,7 @@ require 'minitest/autorun'
 require 'minitest/spec'
 require 'minitest/mock'
 
+
 class Object
   def _describe( test )
     puts "--- On saute les tests pour \"#{test}\" ---"
