@@ -12,8 +12,8 @@ task :default => [:run]
 
 task :tests => [:acceptation_tests, :tests_unitaires]
 
-task :tests_unitaires => [:test_etudiant, 
-                          :test_cours,                           
+task :tests_unitaires => [:test_etudiant,
+                          :test_cours,
                           :test_accesseur,
                           :test_format,
                           :test_bdCours,]
@@ -43,7 +43,7 @@ task :test_cours do
 end
 
 task :test_bdCours do
-  sh %{rake test TEST=test/test_baseDonneeCours}
+  sh %{rake test TEST=test/test_base_donnee_cours}
 end
 
 task :test_accesseur do

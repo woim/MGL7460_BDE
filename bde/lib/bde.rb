@@ -1,9 +1,9 @@
 require 'bde/version.rb'
-require 'bde/BaseDonneeCours'
-require 'bde/Cours'
-require 'bde/Etudiant'
-require 'bde/Accesseur'
-require 'bde/Format'
+require 'bde/base_donnee_cours'
+require 'bde/cours'
+require 'bde/etudiant'
+require 'bde/accesseur'
+require 'bde/format'
 require 'bde/fonction'
 
 # Add requires for other files you add to your project here, so
