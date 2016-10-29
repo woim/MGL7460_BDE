@@ -3,7 +3,7 @@ class Accesseur
   attr_reader :format
   def initialize( formattage )
     @collection_cours = []
-    @format = formattage 
+    @format = formattage
   end
   def charger_base_donnee( nom_fichier )
     fail "Le fichier n'existe pas" unless File.file?( nom_fichier )
@@ -11,12 +11,11 @@ class Accesseur
       @collection_cours.push( @format.extraire_information( ligne ) )
     end
     return @collection_cours
-  end  
+  end
   def sauvegarder_base_donnee( nom_fichier )
     File.open( nom_fichier, "w" ) do |fich|
       @collection_cours.each do |c|
         ligne = @format.ecrire_information( c )
-        ligne += "\n" if c != @collection_cours[-1]
         fich.puts ligne
       end
     end
