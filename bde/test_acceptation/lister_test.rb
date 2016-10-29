@@ -13,28 +13,28 @@ nom_fichier = ".bde.txt"
 describe Bde do
   before{ creer_base_donnee( base_donnee_test, nom_fichier ) }
 
-  describe "liste" do
+  describe "lister" do
 
     it "liste les classes" do
-      bde_cli( 'liste' ).must_equal ['MAT008', 'BIO012', 'PHY018']
+      bde_cli( 'lister_cours' ).must_equal ['MAT008', 'BIO012', 'PHY018']
     end
 
     it "liste les classes dans l'ordre alphabetique" do
-      bde_cli( 'liste -a' ).must_equal ['BIO012', 'MAT008', 'PHY018']
+      bde_cli( 'lister_cours -a' ).must_equal ['BIO012', 'MAT008', 'PHY018']
     end
 
     it "Envoie un message si le cours n'existe pas" do
-      bde_cli( '--class=INF005 liste' ).
+      bde_cli( '--class=INF005 lister_etudiants' ).
         must_equal ["cours: INF005 n'existe pas."]
     end
 
     it "liste les etudiants de la classe MAT008" do
-      bde_cli( '--class=MAT008 liste' ).
+      bde_cli( '--class=MAT008 lister_etudiants' ).
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
 
     it "liste les etudiants de la classe BIO012 dans l'ordre alphabetique" do
-      bde_cli( '--class=BIO012 liste -a' ).
+      bde_cli( '--class=BIO012 lister_etudiants -a' ).
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
 

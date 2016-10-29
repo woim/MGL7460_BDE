@@ -13,7 +13,7 @@ end
 
 include GLI::App
 
-program_desc 'Describe your application here'
+program_desc 'Application pour gerer une base donnee etudiante'
 
 version Bde::VERSION
 
@@ -25,13 +25,12 @@ format = Format.new
 accesseur = Accesseur.new(format)
 baseDonneeCours = BdCours.new(accesseur)
 
-
-desc 'Selectionne les cours'
+desc 'Selectionner le cours'
 arg_name 'sigle_cours'
 flag [:c,:class]
 
-desc 'Liste les eleves d\'un cours / liste les cours autrement'
-command :lister do |c|
+desc 'Lister les eleves d\'un cours'
+command :lister_etudiants do |c|
   c.desc 'arranger la liste par ordre alphabetique'
   c.switch [:a,:arranger]
 
@@ -50,11 +49,22 @@ command :lister do |c|
   end
 end
 
-desc 'Ajouter un eleve ou un cours)'
-command :ajouter do |c|
-  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+desc 'Lister les cours'
+command :lister_cours do |c|
+  c.desc 'arranger la liste par ordre alphabetique'
+  c.switch [:a,:arranger]
+
+  c.action do |global_options,options,args|
+    arranger = options[:arranger]
+    puts baseDonneeCours.lister_cours( arranger )
+  end
+end
+
+desc 'Ajouter un eleve'
+command :ajouter_etudiant do |c|
+  c.desc "Specifier le nom de l'etudiant"
   c.flag [:n,:nom]
-  c.desc "Specifie le prenom de l'etudiant"
+  c.desc "Specifier le prenom de l'etudiant"
   c.flag [:p,:prenom]
 
   c.action do |global_options,options,args|
@@ -73,11 +83,22 @@ command :ajouter do |c|
   end
 end
 
-desc 'Retirer un etudiant ou un cours'
-command :retirer do |c|
-  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+desc 'Ajouter un cours'
+command :ajouter_cours do |c|
+  c.desc "Specifier le nom du cours"
   c.flag [:n,:nom]
-  c.desc "Specifie le prenom de l'etudiant"
+
+  c.action do |global_options,options,args|
+    nom = options[:nom]
+    baseDonneeCours.ajouter_cours( nom )
+  end
+end
+
+desc 'Retirer un etudiant'
+command :retirer_etudiant do |c|
+  c.desc "Specifier le nom de l'etudiant"
+  c.flag [:n,:nom]
+  c.desc "Specifier le prenom de l'etudiant"
   c.flag [:p,:prenom]
 
   c.action do |global_options,options,args|
@@ -96,7 +117,19 @@ command :retirer do |c|
   end
 end
 
-desc 'Liste les evaluations'
+desc 'Retirer un cours'
+command :retirer_cours do |c|
+  c.desc "Specifier le nom de l'etudiant"
+  c.flag [:n,:nom]
+
+  c.action do |global_options,options,args|
+    nom = options[:nom]
+    baseDonneeCours.retirer_cours( nom )
+  end
+end
+
+
+desc 'Lister les evaluations'
 command :obtenir_eval do |c|
 
   c.action do |global_options,options,args|
@@ -114,11 +147,11 @@ end
 
 desc 'Saisit une evaluation pour un eleve '
 command :saisir_eval do |c|
-  c.desc "Specifie le nom de l'item (cours ou etudiant)"
+  c.desc "Specifier le nom de l'etudiant"
   c.flag [:n,:nom]
-  c.desc "Specifie le prenom de l'etudiant"
+  c.desc "Specifier le prenom de l'etudiant"
   c.flag [:p,:prenom]
-  c.desc "Specifie les notes de l'etudiant"
+  c.desc "Specifier les notes de l'etudiant"
   c.flag [:e,:eval]
 
   c.action do |global_options,options,args|
@@ -138,7 +171,7 @@ command :saisir_eval do |c|
   end
 end
 
-desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)'
+desc 'Calculer la moyenne d\'un eleve'
 command :moyenne do |c|
 
   c.action do |global_options,options,args|
