@@ -25,7 +25,7 @@ class Format
         cours.ajouter_etudiant( etudiant )
       end
     end
-    return cours
+    cours
   end
 
   def ecrire_information( cours )
@@ -36,7 +36,7 @@ class Format
       ligne += "=" +  eleve.notes.join(",") if !eleve.notes.empty?
       ligne += "|" if eleve != cours.etudiants[-1]
     end
-    return ligne
+    ligne
   end
 
 end

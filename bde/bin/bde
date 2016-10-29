@@ -38,119 +38,119 @@ command :lister do |c|
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     arranger = options[:arranger]
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ puts baseDonneeCours.lister_cours( arranger ) },
       ->{ puts baseDonneeCours.selectionner_cours( sigle_cours ).
-                                lister_etudiants( arranger ) } 
-    ) 
-    
+                                lister_etudiants( arranger ) }
+    )
+
   end
 end
 
 desc 'Ajouter un eleve ou un cours)'
-command :ajouter do |c| 
+command :ajouter do |c|
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
-  c.flag [:n,:nom]  
+  c.flag [:n,:nom]
   c.desc "Specifie le prenom de l'etudiant"
-  c.flag [:p,:prenom] 
-   
+  c.flag [:p,:prenom]
+
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ baseDonneeCours.ajouter_cours( nom ) },
       ->{ baseDonneeCours.selectionner_cours( sigle_cours ).
                           ajouter_etudiant( Etudiant.new( nom, prenom ) ) }
     )
-    
+
   end
 end
 
 desc 'Retirer un etudiant ou un cours'
 command :retirer do |c|
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
-  c.flag [:n,:nom]  
+  c.flag [:n,:nom]
   c.desc "Specifie le prenom de l'etudiant"
-  c.flag [:p,:prenom] 
-   
+  c.flag [:p,:prenom]
+
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ baseDonneeCours.retirer_cours( nom ) },
       ->{ baseDonneeCours.selectionner_cours( sigle_cours ).
                         retirer_etudiant( Etudiant.new( nom, prenom ) ) }
     )
-     
+
   end
 end
 
 desc 'Liste les evaluations'
 command :obtenir_eval do |c|
-   
+
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ puts "une classe doit etre selectionnee." },
       ->{ puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_evaluations }
     )
-        
+
   end
 end
 
 desc 'Saisit une evaluation pour un eleve '
-command :saisir_eval do |c|  
+command :saisir_eval do |c|
   c.desc "Specifie le nom de l'item (cours ou etudiant)"
-  c.flag [:n,:nom]  
+  c.flag [:n,:nom]
   c.desc "Specifie le prenom de l'etudiant"
   c.flag [:p,:prenom]
   c.desc "Specifie les notes de l'etudiant"
-  c.flag [:e,:eval] 
-   
+  c.flag [:e,:eval]
+
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
     notes = options[:eval].to_f
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ puts "une classe doit etre selectionnee." },
       ->{ baseDonneeCours.selectionner_cours( sigle_cours ).
-                        saisir_eval( Etudiant.new( nom, prenom ), notes ) } 
+                        saisir_eval( Etudiant.new( nom, prenom ), notes ) }
     )
-    
+
   end
 end
 
 desc 'Retourne la moyenne d\'un eleve (format: --class=cours moyenne nom prenom)'
 command :moyenne do |c|
-  
+
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
-    
-    test_options( 
-      sigle_cours, 
-      baseDonneeCours.cours_existe( sigle_cours ),
+
+    test_options(
+      sigle_cours,
+      baseDonneeCours.cours_existe?( sigle_cours ),
       ->{ puts "une classe doit etre selectionnee." },
-      ->{ puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_moyenne } 
+      ->{ puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_moyenne }
     )
-     
+
   end
 end
 
