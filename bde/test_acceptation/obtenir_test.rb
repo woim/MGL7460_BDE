@@ -17,12 +17,12 @@ describe Bde do
 
     it "obtenir evaluation sans classe" do
       bde_cli( 'obtenir_eval' ).
-        must_equal( ["une classe doit etre selectionnee."] )
+        must_equal( ["error: Un sigle de cours doit etre fourni."] )
     end
 
     it "obtenir evaluation si le cours n'existe pas" do
       bde_cli( '--class=INF005 obtenir_eval' ).
-        must_equal ["cours: INF005 n'existe pas."]
+        must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "obtenir evaluation sur un cours qui existe" do

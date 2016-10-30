@@ -17,12 +17,12 @@ describe Bde do
 
     it "obtenir moyenne sans classe" do
       bde_cli( 'moyenne' ).
-        must_equal( ["une classe doit etre selectionnee."] )
+        must_equal( ["error: Un sigle de cours doit etre fourni."] )
     end
 
     it "obtenir moyenne si le cours n'existe pas" do
       bde_cli( '--class=INF005 moyenne' ).
-        must_equal ["cours: INF005 n'existe pas."]
+        must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "obtenir evaluation sur un cours qui existe" do

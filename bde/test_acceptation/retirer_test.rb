@@ -46,7 +46,7 @@ describe Bde do
 
     it "retirer un etudiant sur un cours qui n'existe pas" do
       bde_cli( '--class=INF005 retirer_etudiant -n Loiseau -p Martin' ).
-        must_equal( ["cours: INF005 n'existe pas."] )
+        must_equal( ["error: Cours INF005 n'existe pas."] )
     end
 
     it "retirer un etudiant" do

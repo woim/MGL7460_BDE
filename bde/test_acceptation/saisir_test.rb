@@ -17,12 +17,12 @@ describe Bde do
 
     it "saisir evaluation sans classe" do
       bde_cli( 'saisir_eval' ).
-        must_equal( ["une classe doit etre selectionnee."] )
+        must_equal( ["error: Un sigle de cours doit etre fourni."] )
     end
 
     it "saisir evaluation si le cours n'existe pas" do
       bde_cli( '--class=INF005 saisir_eval' ).
-        must_equal ["cours: INF005 n'existe pas."]
+        must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "saisir evaluation si un etudiant qui n'existe pas" do
@@ -32,7 +32,7 @@ describe Bde do
 
     it "saisir evaluation sur un cours qui n'existe pas" do
       bde_cli( '--class=INF005 saisir_eval -n Loiseau -p Martin' ).
-        must_equal( ["cours: INF005 n'existe pas."] )
+        must_equal( ["error: Cours INF005 n'existe pas."] )
     end
 
     it "saisir une evaluation" do

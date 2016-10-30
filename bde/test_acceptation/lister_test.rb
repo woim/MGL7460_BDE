@@ -25,7 +25,7 @@ describe Bde do
 
     it "Envoie un message si le cours n'existe pas" do
       bde_cli( '--class=INF005 lister_etudiants' ).
-        must_equal ["cours: INF005 n'existe pas."]
+        must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "liste les etudiants de la classe MAT008" do

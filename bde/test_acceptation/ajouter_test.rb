@@ -48,7 +48,7 @@ describe Bde do
 
     it "ajouter un etudiant sur un cours qui n'existe pas" do
       bde_cli( '--class=INF005 ajouter_etudiant -n Loiseau -p Martin' ).
-        must_equal( ["cours: INF005 n'existe pas."] )
+        must_equal( ["error: Cours INF005 n'existe pas."] )
     end
 
     it "ajouter un etudiant" do
