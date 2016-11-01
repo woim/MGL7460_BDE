@@ -42,12 +42,12 @@ describe Bde do
     end
 
     it "ajouter un etudiant qui existe deja" do
-      bde_cli( '--class=MAT008 ajouter_etudiant -n Loiseau -p Martin' ).
+      bde_cli( 'ajouter_etudiant --class=MAT008 -n Loiseau -p Martin' ).
         must_equal( ["error: Loiseau Martin existe deja."] )
     end
 
     it "ajouter un etudiant sur un cours qui n'existe pas" do
-      bde_cli( '--class=INF005 ajouter_etudiant -n Loiseau -p Martin' ).
+      bde_cli( 'ajouter_etudiant --class=INF005 -n Loiseau -p Martin' ).
         must_equal( ["error: Cours INF005 n'existe pas."] )
     end
 
@@ -56,7 +56,7 @@ describe Bde do
         "MAT008/Loiseau,Martin=12.0,13.0,14.0|Thibodeau,Jean,Charles-Henri=18.0,18.0,18.0|Loup,Garou",
         "BIO012/Thibodeau,Jean,Charles-Henri=17.0,13.0,15.0|Loiseau,Martin=17.0,19.0,15.0",
         "PHY018/Loiseau,Martin=17.0,19.0,15.0|Thibodeau,Jean,Charles-Henri=18.0,19.0,16.0" ]
-      bde_cli( '--class=MAT008 ajouter_etudiant -n Loup -p Garou' )
+      bde_cli( 'ajouter_etudiant --class=MAT008 -n Loup -p Garou' )
       File.open( nom_fichier, "r" ).read.split("\n").
         must_equal( nouvelle_base_donnee )
     end
