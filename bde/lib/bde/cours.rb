@@ -16,12 +16,12 @@ class Cours
   end
 
 	def ajouter_etudiant( etudiant )
-    test_etudiant( etudiant, @etudiants.include?( etudiant ), " existe deja." )
+    verifier_etudiant( etudiant, @etudiants.include?( etudiant ) )
     @etudiants.push( etudiant )
 	end
 
   def retirer_etudiant( etudiant )
-    test_etudiant( etudiant, !@etudiants.include?( etudiant ), " n'existe pas." )
+    verifier_etudiant( etudiant, !@etudiants.include?( etudiant ), false )
     @etudiants.delete( etudiant )
 	end
 
@@ -32,7 +32,7 @@ class Cours
 	end
 
   def saisir_eval( etudiant, note )
-    test_etudiant( etudiant, !@etudiants.include?( etudiant ), " n'existe pas." )
+    verifier_etudiant( etudiant, !@etudiants.include?( etudiant ), false )
     index = @etudiants.find_index( etudiant )
     @etudiants[index].ajouter_note( note )
 	end
@@ -47,7 +47,7 @@ class Cours
   end
 
   def ==(c)
-    @sigle == c.sigle
+    @sigle == c.sigle &&
     @etudiants == c.etudiants
   end
 
@@ -57,16 +57,21 @@ class Cours
 
   private
 
-  def test_etudiant( etudiant, condition, message )
+  def verifier_etudiant( etudiant, condition, present=true )
     fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
-    fail etudiant.afficher_etat_civil + message if condition
+    message = etudiant.afficher_etat_civil
+    if present
+      message += " existe deja."
+    else
+      message += " n'existe pas."
+    end
+    fail message if condition
   end
 
   def calculer_moyenne( notes )
     return nil if notes.size == 0
-    somme = 0
-    notes.each{ |n| somme += n }
+    somme = notes.reduce(0, :+)
     somme /= notes.size
   end
 
