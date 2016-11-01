@@ -37,10 +37,10 @@ command :lister_etudiants do |c|
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
     arranger = options[:arranger]
-    
-    test_cours( sigle_cours, baseDonneeCours )
+
+    verifier_cours( sigle_cours, baseDonneeCours )
     puts baseDonneeCours.selectionner_cours( sigle_cours )
-                        .lister_etudiants( arranger )      
+                        .lister_etudiants( arranger )
   end
 end
 
@@ -67,7 +67,7 @@ command :ajouter_etudiant do |c|
     nom = options[:nom]
     prenom = options[:prenom]
 
-    test_cours( sigle_cours, baseDonneeCours )
+    verifier_cours( sigle_cours, baseDonneeCours )
     baseDonneeCours.selectionner_cours( sigle_cours )
                    .ajouter_etudiant( Etudiant.new( nom, prenom ) )
 
@@ -97,7 +97,7 @@ command :retirer_etudiant do |c|
     nom = options[:nom]
     prenom = options[:prenom]
 
-    test_cours( sigle_cours, baseDonneeCours )
+    verifier_cours( sigle_cours, baseDonneeCours )
     baseDonneeCours.selectionner_cours( sigle_cours )
                    .retirer_etudiant( Etudiant.new( nom, prenom ) )
   end
@@ -121,7 +121,7 @@ command :obtenir_eval do |c|
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
 
-    test_cours( sigle_cours, baseDonneeCours )
+    verifier_cours( sigle_cours, baseDonneeCours )
     puts baseDonneeCours.selectionner_cours( sigle_cours )
                         .lister_evaluations
   end
@@ -142,7 +142,7 @@ command :saisir_eval do |c|
     prenom = options[:prenom]
     notes = options[:eval].to_f
 
-    test_cours( sigle_cours, baseDonneeCours )
+    verifier_cours( sigle_cours, baseDonneeCours )
     baseDonneeCours.selectionner_cours( sigle_cours )
                    .saisir_eval( Etudiant.new( nom, prenom ), notes )
 
@@ -155,9 +155,9 @@ command :moyenne do |c|
   c.action do |global_options,options,args|
     sigle_cours = global_options[:class]
 
-    test_cours( sigle_cours, baseDonneeCours )
+    verifier_cours( sigle_cours, baseDonneeCours )
     puts baseDonneeCours.selectionner_cours( sigle_cours ).lister_moyenne
-    
+
   end
 end
 
