@@ -94,13 +94,16 @@ end
 
 desc 'Retirer un etudiant'
 command :retirer_etudiant do |c|
+  c.desc 'Selectionner le cours'
+  c.arg_name 'sigle_cours'
+  c.flag [:c,:class]
   c.desc "Specifier le nom de l'etudiant"
   c.flag [:n,:nom]
   c.desc "Specifier le prenom de l'etudiant"
   c.flag [:p,:prenom]
 
   c.action do |global_options,options,args|
-    sigle_cours = global_options[:class]
+    sigle_cours = options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
 
