@@ -21,12 +21,12 @@ describe Bde do
     end
 
     it "obtenir evaluation si le cours n'existe pas" do
-      bde_cli( '--class=INF005 obtenir_eval' ).
+      bde_cli( 'obtenir_eval --class=INF005' ).
         must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "obtenir evaluation sur un cours qui existe" do
-      bde_cli( '--class=MAT008 obtenir_eval' ).
+      bde_cli( 'obtenir_eval --class=MAT008' ).
         must_equal( [ "Loiseau Martin: 12.0 13.0 14.0",
                       "Thibodeau Jean Charles-Henri: 18.0 18.0 18.0"] )
     end

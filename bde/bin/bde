@@ -127,9 +127,12 @@ end
 
 desc 'Lister les evaluations'
 command :obtenir_eval do |c|
+  c.desc 'Selectionner le cours'
+  c.arg_name 'sigle_cours'
+  c.flag [:c,:class]
 
   c.action do |global_options,options,args|
-    sigle_cours = global_options[:class]
+    sigle_cours = options[:class]
 
     verifier_cours( sigle_cours, baseDonneeCours )
     puts baseDonneeCours.selectionner_cours( sigle_cours )
