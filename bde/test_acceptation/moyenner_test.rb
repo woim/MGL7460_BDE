@@ -21,12 +21,12 @@ describe Bde do
     end
 
     it "obtenir moyenne si le cours n'existe pas" do
-      bde_cli( '--class=INF005 moyenne' ).
+      bde_cli( 'moyenne --class=INF005' ).
         must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "obtenir evaluation sur un cours qui existe" do
-      bde_cli( '--class=MAT008 moyenne' ).
+      bde_cli( 'moyenne --class=MAT008' ).
         must_equal( [ "Loiseau Martin: 13.0",
                       "Thibodeau Jean Charles-Henri: 18.0"] )
     end
