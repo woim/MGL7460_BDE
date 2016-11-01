@@ -12,7 +12,7 @@ class Cours
   def lister_etudiants( arranger = nil )
     return String.new if etudiants.empty?
     @etudiants_ordonnes = arranger ? @etudiants.sort : @etudiants
-    @etudiants_ordonnes.map{ |e| "#{e.afficher_etat_civil}" }.join("\n")
+    @etudiants_ordonnes.map{ |e| "#{e.etat_civil}" }.join("\n")
   end
 
 	def ajouter_etudiant( etudiant )
@@ -27,7 +27,7 @@ class Cours
 
   def lister_evaluations
     return String.new if etudiants.empty?
-    @etudiants.map{ |e| e.afficher_etat_civil + ": " + e.afficher_notes }
+    @etudiants.map{ |e| e.etat_civil + ": " + e.notes_to_s }
       .join("\n")
 	end
 
@@ -41,7 +41,7 @@ class Cours
     eval = String.new
     @etudiants.each do |eleve|
       moyenne = calculer_moyenne( eleve.notes )
-      eval += eleve.afficher_etat_civil + ": " + moyenne.to_s + "\n"
+      eval += eleve.etat_civil + ": " + moyenne.to_s + "\n"
     end
     eval
   end
@@ -60,7 +60,7 @@ class Cours
   def verifier_etudiant( etudiant, condition, present=true )
     fail "L'argument n'est pas de type etudiant" \
       unless etudiant.instance_of? Etudiant
-    message = etudiant.afficher_etat_civil
+    message = etudiant.etat_civil
     if present
       message += " existe deja."
     else

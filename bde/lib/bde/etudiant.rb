@@ -1,4 +1,5 @@
 class Etudiant
+  #include Enumerable ca ne marche pas
 	attr_accessor :nom
   attr_reader :prenoms
   attr_reader :notes
@@ -18,16 +19,16 @@ class Etudiant
     @notes = @notes.flatten
   end
 
-	def afficher_notes
+	def notes_to_s
     @notes.join(" ")
   end
 
-  def afficher_etat_civil
+  def etat_civil
     @nom + " " + @prenoms.join(" ")
   end
 
   def ==(e)
-    @nom == e.nom
+    @nom == e.nom &&
     @prenoms == e.prenoms
   end
 

@@ -53,32 +53,32 @@ describe Etudiant do
     end
   end
   
-  describe "#afficher_notes" do
+  describe "#notes_to_s" do
     let(:notes) { [15, 16, 17] }
     before { @etudiant = Etudiant.new( "Robert", "Lapin" ) }    
     
     it "affiche rien si aucune note saisie" do
-      @etudiant.afficher_notes.must_be_empty
+      @etudiant.notes_to_s.must_be_empty
     end
     
     it "afficher les notes" do
       @etudiant.ajouter_note( notes )
-      @etudiant.afficher_notes.must_equal "15.0 16.0 17.0"
+      @etudiant.notes_to_s.must_equal "15.0 16.0 17.0"
     end   
   end
   
-  describe "#afficher_etat_civil" do
+  describe "#etat_civil" do
     before do 
       @etudiant1 = Etudiant.new( "Robert", "Lapin" )
       @etudiant2 = Etudiant.new( "Robert", "Lapin", "Garou" ) 
     end
     
     it "afficher etat civil etudiant" do
-      @etudiant1.afficher_etat_civil.must_equal "Robert Lapin"
+      @etudiant1.etat_civil.must_equal "Robert Lapin"
     end
     
     it "afficher etat civil etudiant avec 2 prenoms" do
-      @etudiant2.afficher_etat_civil.must_equal "Robert Lapin Garou"
+      @etudiant2.etat_civil.must_equal "Robert Lapin Garou"
     end
   end
   
