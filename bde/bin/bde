@@ -27,8 +27,7 @@ baseDonneeCours = BdCours.new(accesseur)
 
 desc 'Selectionner archive base donnee'
 arg_name 'nom_fichier'
-arg_default = ".bde.txt"
-flag [:f,:fichier]
+flag [:f,:fichier], :default_value => ".bde.txt"
 
 desc 'Lister les eleves d\'un cours'
 command :lister_etudiants do |c|
@@ -181,14 +180,12 @@ command :moyenne do |c|
 end
 
 pre do |global,command,options,args|
-  #fichier_base_donnee = global[:fichier] marche pas
-  baseDonneeCours.charger_base_donnee(".bde.txt")
+  baseDonneeCours.charger_base_donnee( global[:fichier] )
   true
 end
 
 post do |global,command,options,args|
-  #fichier_base_donnee = global[:fichier] marche pas
-  baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
+  baseDonneeCours.sauvegarder_base_donnee( global[:fichier] )
 end
 
 on_error do |exception|
