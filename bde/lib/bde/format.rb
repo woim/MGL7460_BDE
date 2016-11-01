@@ -1,6 +1,6 @@
 class Format
 
-  def extraire_information( ligne )
+  def deformater( ligne )
     champ = ligne.split("/")
     cours = Cours.new( champ[0] )
 
@@ -28,7 +28,7 @@ class Format
     cours
   end
 
-  def ecrire_information( cours )
+  def formater( cours )
   	ligne = cours.sigle + "/"
   	cours.etudiants.each do |eleve|
       ligne +=  eleve.nom + "," +

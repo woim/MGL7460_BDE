@@ -21,7 +21,7 @@ describe Accesseur do
     before do  
       @mock_format = MiniTest::Mock.new
       liste_cours.each do |cours|
-        @mock_format.expect( :extraire_information, cours, [cours.sigle+"\n"] )
+        @mock_format.expect( :deformater, cours, [cours.sigle+"\n"] )
       end
       @accesseur = Accesseur.new( @mock_format )
     end
@@ -43,7 +43,7 @@ describe Accesseur do
       creer_base_donnee( base_donnee_test, nom_fichier1 )
       @mock_format = MiniTest::Mock.new
       liste_cours.each do |cours|
-        @mock_format.expect( :ecrire_information, cours.sigle, [cours] )
+        @mock_format.expect( :formater, cours.sigle, [cours] )
       end
       @accesseur = Accesseur.new( @mock_format )
       @accesseur.collection_cours = liste_cours

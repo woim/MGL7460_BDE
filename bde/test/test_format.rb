@@ -20,14 +20,14 @@ describe Format do
     
   describe "#extraire_cours_information" do  
     it "extrait l'information d'une ligne" do
-      cours_extrait = @format.extraire_information( @champ )
+      cours_extrait = @format.deformater( @champ )
       @cours.must_equal( cours_extrait )
     end
   end
   
   describe "#ecrire_cours_information" do
     it "ecrit l' information d'un cours dans un champ(string)" do
-      champ_ecrit = @format.ecrire_information( @cours )
+      champ_ecrit = @format.formater( @cours )
       @champ.must_equal( champ_ecrit )
     end
   end  
