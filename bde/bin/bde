@@ -25,17 +25,21 @@ format = Format.new
 accesseur = Accesseur.new(format)
 baseDonneeCours = BdCours.new(accesseur)
 
-desc 'Selectionner le cours'
-arg_name 'sigle_cours'
-flag [:c,:class]
+desc 'Selectionner archive base donnee'
+arg_name 'nom_fichier'
+arg_default = ".bde.txt"
+flag [:f,:fichier]
 
 desc 'Lister les eleves d\'un cours'
 command :lister_etudiants do |c|
   c.desc 'arranger la liste par ordre alphabetique'
   c.switch [:a,:arranger]
+  c.desc 'Selectionner le cours'
+  c.arg_name 'sigle_cours'
+  c.flag [:c,:class]
 
   c.action do |global_options,options,args|
-    sigle_cours = global_options[:class]
+    sigle_cours = options[:class]
     arranger = options[:arranger]
 
     verifier_cours( sigle_cours, baseDonneeCours )
@@ -57,13 +61,16 @@ end
 
 desc 'Ajouter un eleve'
 command :ajouter_etudiant do |c|
+  c.desc 'Selectionner le cours'
+  c.arg_name 'sigle_cours'
+  c.flag [:c,:class]
   c.desc "Specifier le nom de l'etudiant"
   c.flag [:n,:nom]
   c.desc "Specifier le prenom de l'etudiant"
   c.flag [:p,:prenom]
 
   c.action do |global_options,options,args|
-    sigle_cours = global_options[:class]
+    sigle_cours = options[:class]
     nom = options[:nom]
     prenom = options[:prenom]
 
@@ -162,11 +169,13 @@ command :moyenne do |c|
 end
 
 pre do |global,command,options,args|
+  #fichier_base_donnee = global[:fichier] marche pas
   baseDonneeCours.charger_base_donnee(".bde.txt")
   true
 end
 
 post do |global,command,options,args|
+  #fichier_base_donnee = global[:fichier] marche pas
   baseDonneeCours.sauvegarder_base_donnee(".bde.txt")
 end
 

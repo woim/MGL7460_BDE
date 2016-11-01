@@ -24,17 +24,17 @@ describe Bde do
     end
 
     it "Envoie un message si le cours n'existe pas" do
-      bde_cli( '--class=INF005 lister_etudiants' ).
+      bde_cli( 'lister_etudiants --class=INF005' ).
         must_equal ["error: Cours INF005 n'existe pas."]
     end
 
     it "liste les etudiants de la classe MAT008" do
-      bde_cli( '--class=MAT008 lister_etudiants' ).
+      bde_cli( 'lister_etudiants --class=MAT008' ).
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
 
     it "liste les etudiants de la classe BIO012 dans l'ordre alphabetique" do
-      bde_cli( '--class=BIO012 lister_etudiants -a' ).
+      bde_cli( 'lister_etudiants -a --class=BIO012' ).
         must_equal ['Loiseau Martin', 'Thibodeau Jean Charles-Henri']
     end
 
