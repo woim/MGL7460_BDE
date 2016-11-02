@@ -1,4 +1,5 @@
 class Cours
+  include Comparable
   attr_reader :sigle
   attr_reader :etudiants
 
@@ -10,7 +11,6 @@ class Cours
   end
 
   def lister_etudiants( arranger = nil )
-    return String.new if etudiants.empty?
     @etudiants_ordonnes = arranger ? @etudiants.sort : @etudiants
     @etudiants_ordonnes.map{ |e| "#{e.etat_civil}" }.join("\n")
   end
@@ -26,7 +26,6 @@ class Cours
 	end
 
   def lister_evaluations
-    return String.new if etudiants.empty?
     @etudiants.map{ |e| e.etat_civil + ": " + e.notes_to_s }
       .join("\n")
 	end
@@ -38,20 +37,12 @@ class Cours
 	end
 
   def lister_moyenne
-    eval = String.new
-    @etudiants.each do |eleve|
-      moyenne = calculer_moyenne( eleve.notes )
-      eval += eleve.etat_civil + ": " + moyenne.to_s + "\n"
-    end
-    eval
-  end
-
-  def ==(c)
-    @sigle == c.sigle &&
-    @etudiants == c.etudiants
+    @etudiants.map{ |e| e.etat_civil + ": " + calculer_moyenne( e.notes ).to_s }
+              .join("\n")
   end
 
   def <=>(c)
+    # On ordonne / au sigle mais pas les etudiants ce qui peut etre un pb un jour
     @sigle <=> c.sigle
   end
 
