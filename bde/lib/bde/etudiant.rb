@@ -1,5 +1,5 @@
 class Etudiant
-  #include Enumerable ca ne marche pas
+  include Comparable
 	attr_accessor :nom
   attr_reader :prenoms
   attr_reader :notes
@@ -25,11 +25,6 @@ class Etudiant
 
   def etat_civil
     @nom + " " + @prenoms.join(" ")
-  end
-
-  def ==(e)
-    @nom == e.nom &&
-    @prenoms == e.prenoms
   end
 
   def <=>(e)
