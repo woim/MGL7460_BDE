@@ -1,8 +1,21 @@
 class Etudiant
   include Comparable
-	attr_accessor :nom
-  attr_reader :prenoms
-  attr_reader :notes
+	attr_accessor :nom, :prenoms, :notes
+  #attr_reader :prenoms
+  #attr_reader :notes
+
+  def self.create
+    nouveau_etudiant = new
+    yield nouveau_etudiant
+    DBC.assert nouveau_etudiant.valide?,
+    nouveau_etudiant
+  end
+
+  def new
+    @nom = nil
+    @prenoms = nil
+    @notes = nil
+  end
 
   def initialize( nom, *args )
     fail "un etudiant doit avoir au moins un nom et un prenom" if args.empty?
