@@ -52,6 +52,13 @@ class Cours
     @sigle <=> c.sigle
   end
 
+  def as_json(options={})
+    {
+      sigle: @sigle,
+      etudiants: @etudiants.map { |e| e.as_json },
+    }
+  end
+
   private
 
   def verifier_etudiant( etudiant, condition, present=true )

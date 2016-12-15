@@ -45,7 +45,7 @@ describe Cours do
       lambda{ Cours.create( sigle ) do |c|
                   c.ajouter_etudiant("Blah")
                   c.ajouter_etudiant(@etudiant2)
-                end }.must_raise( RuntimeError ) 
+                end }.must_raise( RuntimeError )
     end
   end
 
@@ -180,4 +180,32 @@ describe Cours do
     end
   end
 
+  describe "#as_json" do
+    let(:sigle) { "CHI001" }
+    before do
+      @etudiant1 = Etudiant.create do |e|
+          e.nom = "Theon"
+          e.prenoms = "Greyjoy"
+          e.notes = [12,14,15]
+      end
+      @etudiant2 = Etudiant.create do |e|
+          e.nom = "Lannister"
+          e.prenoms = "Thirion"
+          e.notes = [19,19,19]
+      end
+      @cours = Cours.create( sigle ) do |c|
+                c.ajouter_etudiant(@etudiant1)
+                c.ajouter_etudiant(@etudiant2)
+      end
+      @json =
+      {
+        sigle: sigle,
+        etudiants: [@etudiant1,@etudiant2].map { |e| e.as_json }
+      }
+    end
+
+    it "convertit l'objet to json" do
+      @cours.as_json.must_equal(@json)
+    end
+  end
 end
