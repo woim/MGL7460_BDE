@@ -23,8 +23,8 @@ class Etudiant
 
 	def ajouter_note( *args )
     args = args.flatten
-    fail "les arguments ne peuvent etre que des chiffres entier" \
-      unless args.all?{ |x| ( x.is_a? Numeric ) && x >= 0 }
+    fail "les arguments ne peuvent etre que des chiffres entier"
+      unless notes_valides?( notes )
  		@notes.concat( args.map!{ |x| x.to_f } )
     @notes = @notes.flatten
   end
