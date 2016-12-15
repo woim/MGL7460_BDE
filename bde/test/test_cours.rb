@@ -85,7 +85,7 @@ describe Cours do
     it "retourne la liste des etudiants arrangee alphabetiquement" do
       @cours.ajouter_etudiant( @etudiant1 )
       @cours.ajouter_etudiant( @etudiant2 )
-      @cours.lister_etudiants( true ).must_equal "Martin Lucie\nThibodeau Jean"      
+      @cours.lister_etudiants( true ).must_equal "Martin Lucie\nThibodeau Jean"
     end
   end
 
