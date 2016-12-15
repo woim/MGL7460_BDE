@@ -2,17 +2,16 @@ class Etudiant
   include Comparable
 	attr_accessor :nom, :prenoms, :notes
 
-  def initialize
-    @nom = nil
-    @prenoms = nil
-    @notes = nil
-  end
-
-  def initialize( nom, *args )
-    fail "un etudiant doit avoir au moins un nom et un prenom" if args.empty?
-    @nom = nom
-    @prenoms = args.flatten
+  def initialize( *args )
     @notes = []
+    if args.empty?
+      @nom = nil
+      @prenoms = nil
+    else
+        fail "un etudiant doit avoir au moins un nom et un prenom" if args.length < 2
+        @nom = args[0]
+        @prenoms = args.flatten[1..args.length]
+    end
   end
 
   def self.create
@@ -46,10 +45,16 @@ class Etudiant
     end
   end
 
+  def valider
+    fail " nom invalide " unless nom_valide?( nom )
+    fail " prenoms invalide " unless prenoms_valides?( prenoms )
+    fail " notes invalides " unless notes_valides?( notes )
+  end
+
   private
 
   def notes_valides?( notes )
-    notes.all?{ |x| x.is_a? Numeric && x >= 0 }
+    notes.all?{ |x| ( x.is_a?( Numeric ) ) && ( x >= 0 ) }
   end
 
   def nom_valide?( nom )
@@ -57,13 +62,6 @@ class Etudiant
   end
 
   def prenoms_valides?( prenoms )
-    prenoms && prenoms.all?{ |x| x.is_a? String && x =~ /^[A-z]+$/ }
+    prenoms.all?{ |x| ( x.is_a?( String ) ) && ( x =~ /^[A-z]+$/ ) }
   end
-
-  def valider
-    fail " nom invalide " unless nom_valide?( nom )
-    fail " prenoms invalide " unless prenoms_valide?( nom )
-    fail " notes invalides " unless notes_valides?( notes )
-  end
-
 end

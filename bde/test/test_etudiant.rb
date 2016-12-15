@@ -35,7 +35,7 @@ describe Etudiant do
     end
 
     it "cree un etudiant avec une api coulante" do
-      etudiant2 = Etudiant.create do |e|
+      @etudiant2 = Etudiant.create do |e|
                     e.nom = nom
                     e.prenoms = prenoms
                     e.notes = notes
