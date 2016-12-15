@@ -10,6 +10,12 @@ class Cours
     @etudiants = []
   end
 
+  def self.create( sigle )
+    nouveau_cours = new( sigle )
+    yield nouveau_cours
+    nouveau_cours
+  end
+
   def lister_etudiants( arranger = nil )
     @etudiants_ordonnes = arranger ? @etudiants.sort : @etudiants
     @etudiants_ordonnes.map{ |e| "#{e.etat_civil}" }.join("\n")

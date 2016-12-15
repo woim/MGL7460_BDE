@@ -61,7 +61,12 @@ class Etudiant
   end
 
   def prenoms_valides?( prenoms )
-    prenoms.all?{ |x| ( x.is_a?( String ) ) && ( x =~ /^[A-z-]+$/ ) }
+    if prenoms.kind_of?( Array )
+      prenoms.all?{ |x| ( x.is_a?( String ) ) && ( x =~ /^[A-z-]+$/ ) }
+    else
+      nom_valide?( prenoms )
+      @prenoms = [prenoms]
+    end
   end
 
 end

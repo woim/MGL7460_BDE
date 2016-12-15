@@ -36,15 +36,16 @@ describe Cours do
           e.prenoms = "Thirion"
           e.notes = [19,19,19]
       end
+      @cours1 = Cours.new(sigle)
+      @cours1.ajouter_etudiant(@etudiant1)
+      @cours1.ajouter_etudiant(@etudiant2)
     end
 
-    it "cree un cours avec une api coulante" do
-      @cours2 = Cours.create do |c|
-                    c.sigle = sigle
-                    c.ajouter_etudiant(@etudiant1)
-                    c.ajouter_etudiant(@etudiant2)
-                  end
-      @cours2.must_equal(@cours1)
+    it "cree un cours avec une api coulante et un autre type qu'etudiant" do
+      lambda{ Cours.create( sigle ) do |c|
+                  c.ajouter_etudiant("Blah")
+                  c.ajouter_etudiant(@etudiant2)
+                end }.must_raise( RuntimeError ) 
     end
   end
 
