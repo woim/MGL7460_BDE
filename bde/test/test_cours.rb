@@ -23,6 +23,31 @@ describe Cours do
     end
   end
 
+  describe "#create" do
+    let(:sigle) { "CHI001" }
+    before do
+      @etudiant1 = Etudiant.create do |e|
+          e.nom = "Theon"
+          e.prenoms = "Greyjoy"
+          e.notes = [12,14,15]
+      end
+      @etudiant2 = Etudiant.create do |e|
+          e.nom = "Lannister"
+          e.prenoms = "Thirion"
+          e.notes = [19,19,19]
+      end
+    end
+
+    it "cree un cours avec une api coulante" do
+      @cours2 = Cours.create do |c|
+                    c.sigle = sigle
+                    c.ajouter_etudiant(@etudiant1)
+                    c.ajouter_etudiant(@etudiant2)
+                  end
+      @cours2.must_equal(@cours1)
+    end
+  end
+
   describe "#ajouter_etudiant" do
     before do
       @etudiant1 = Etudiant.new( "Thibodeau", "Jean" )
