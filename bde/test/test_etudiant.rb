@@ -30,22 +30,22 @@ describe Etudiant do
     let(:prenoms) { ["Jean","Gustave"] }
     let(:notes) { [11,12,13] }
     before do
-      @etudiant1 = Etudiant.new(nom,prenoms[0],prenoms[1])
+      @etudiant1 = Etudiant.new( nom, prenoms )
       @etudiant1.notes = notes
     end
 
     it "cree un etudiant avec une api coulante" do
-      @etudiant2 = Etudiant.create do |e|
-        e.nom = nom
-        e.prenoms = prenoms
-        e.notes = notes
-      end
-      @etudiant1.must_equal(@etudiant2)
+      etudiant2 = Etudiant.create do |e|
+                    e.nom = nom
+                    e.prenoms = prenoms
+                    e.notes = notes
+                  end
+      @etudiant2.must_equal(@etudiant1)
     end
 
     it "cree un etudiant avec une api coulante et un mauvais nom" do
       lambda{ Etudiant.create do |e|
-                e.nom = "GHg15"
+                e.nom = nom
                 e.prenoms = prenoms
                 e.notes = notes
               end }.must_raise( RuntimeError )

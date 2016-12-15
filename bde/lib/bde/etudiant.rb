@@ -1,20 +1,12 @@
 class Etudiant
   include Comparable
 	attr_accessor :nom, :prenoms, :notes
-  #attr_reader :prenoms
-  #attr_reader :notes
 
   def self.create
-    nouveau_etudiant = new
-    yield nouveau_etudiant
-    DBC.assert nouveau_etudiant.valide?,
-    nouveau_etudiant
-  end
-
-  def new
-    @nom = nil
-    @prenoms = nil
-    @notes = nil
+    nouvel_etudiant = new( nil )
+    yield nouvel_etudiant
+    nouvel_etudiant.valider
+    nouvel_etudiant
   end
 
   def initialize( nom, *args )
@@ -46,6 +38,26 @@ class Etudiant
     else
       @nom <=> e.nom
     end
+  end
+
+  private
+
+  def notes_valides?( notes )
+    notes.all?{ |x| x.is_a? Numeric && x >= 0 }
+  end
+
+  def nom_valide?( nom )
+    nom && nom.kind_of?( String ) && nom =~ /^[A-z]+$/
+  end
+
+  def prenoms_valides?( prenoms )
+    prenoms && prenoms.all?{ |x| x.is_a? String && x =~ /^[A-z]+$/ }
+  end
+
+  def valider
+    fail " nom invalide " unless nom_valide?( nom )
+    fail " prenoms invalide " unless prenoms_valide?( nom )
+    fail " notes invalides " unless notes_valides?( notes )
   end
 
 end
