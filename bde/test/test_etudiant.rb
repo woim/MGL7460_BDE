@@ -42,6 +42,30 @@ describe Etudiant do
       end
       @etudiant1.must_equal(@etudiant2)
     end
+
+    it "cree un etudiant avec une api coulante et un mauvais nom" do
+      lambda{ Etudiant.create do |e|
+                e.nom = "GHg15"
+                e.prenoms = prenoms
+                e.notes = notes
+              end }.must_raise( RuntimeError )
+    end
+
+    it "cree un etudiant avec une api coulante et mauvais prenoms" do
+      lambda{ Etudiant.create do |e|
+                e.nom = nom
+                e.prenoms = ["martin","GHg15"]
+                e.notes = notes
+              end }.must_raise( RuntimeError )
+    end
+
+    it "cree un etudiant avec une api coulante et mauvais prenoms" do
+      lambda{ Etudiant.create do |e|
+                e.nom = nom
+                e.prenoms = prenoms
+                e.notes = [12,-15]
+              end }.must_raise( RuntimeError )
+    end
   end
 
   describe "#ajouter_note" do
