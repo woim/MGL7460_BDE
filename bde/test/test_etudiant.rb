@@ -139,4 +139,27 @@ describe Etudiant do
       ( @etudiant1 == @etudiant3 ) == false
     end
   end
+
+  describe "#as_json" do
+    let(:nom) { "Thibodeau" }
+    let(:prenoms) { ["Jean","Gustave"] }
+    let(:notes) { [11,12,13] }
+    before do
+      @etudiant = Etudiant.create do |e|
+                    e.nom = nom
+                    e.prenoms = prenoms
+                    e.notes = notes
+                  end
+      @json = {
+        nom: nom,
+        prenoms: prenoms,
+        notes: notes
+      }
+    end
+
+    it "convertit l'objet to json" do
+      @etudiant.as_json.must_equal(@json)
+    end
+  end
+
 end

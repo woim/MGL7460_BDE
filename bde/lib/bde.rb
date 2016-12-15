@@ -5,6 +5,7 @@ require 'bde/etudiant'
 require 'bde/accesseur'
 require 'bde/format'
 require 'bde/fonction'
+require 'json'
 
 # Add requires for other files you add to your project here, so
 # you just need to require this one file in your bin file
