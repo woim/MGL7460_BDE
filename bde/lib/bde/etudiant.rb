@@ -2,11 +2,10 @@ class Etudiant
   include Comparable
 	attr_accessor :nom, :prenoms, :notes
 
-  def self.create
-    nouvel_etudiant = new( nil )
-    yield nouvel_etudiant
-    nouvel_etudiant.valider
-    nouvel_etudiant
+  def initialize
+    @nom = nil
+    @prenoms = nil
+    @notes = nil
   end
 
   def initialize( nom, *args )
@@ -14,6 +13,13 @@ class Etudiant
     @nom = nom
     @prenoms = args.flatten
     @notes = []
+  end
+
+  def self.create
+    nouvel_etudiant = new
+    yield nouvel_etudiant
+    nouvel_etudiant.valider
+    nouvel_etudiant
   end
 
 	def ajouter_note( *args )

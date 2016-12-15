@@ -45,7 +45,7 @@ describe Etudiant do
 
     it "cree un etudiant avec une api coulante et un mauvais nom" do
       lambda{ Etudiant.create do |e|
-                e.nom = nom
+                e.nom = "GHg15"
                 e.prenoms = prenoms
                 e.notes = notes
               end }.must_raise( RuntimeError )
@@ -59,7 +59,7 @@ describe Etudiant do
               end }.must_raise( RuntimeError )
     end
 
-    it "cree un etudiant avec une api coulante et mauvais prenoms" do
+    it "cree un etudiant avec une api coulante et notes incorrectes" do
       lambda{ Etudiant.create do |e|
                 e.nom = nom
                 e.prenoms = prenoms
