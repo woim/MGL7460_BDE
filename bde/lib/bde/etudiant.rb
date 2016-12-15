@@ -23,8 +23,7 @@ class Etudiant
 
 	def ajouter_note( *args )
     args = args.flatten
-    fail "les arguments ne peuvent etre que des chiffres entier"
-      unless notes_valides?( notes )
+    fail "les arguments ne peuvent etre que des chiffres entier" unless notes_valides?( args )
  		@notes.concat( args.map!{ |x| x.to_f } )
     @notes = @notes.flatten
   end
@@ -54,7 +53,7 @@ class Etudiant
   private
 
   def notes_valides?( notes )
-    notes.all?{ |x| ( x.is_a?( Numeric ) ) && ( x >= 0 ) }
+    notes && notes.all?{ |x| ( x.is_a?( Numeric ) ) && ( x >= 0 ) }
   end
 
   def nom_valide?( nom )
@@ -62,6 +61,7 @@ class Etudiant
   end
 
   def prenoms_valides?( prenoms )
-    prenoms.all?{ |x| ( x.is_a?( String ) ) && ( x =~ /^[A-z]+$/ ) }
+    prenoms.all?{ |x| ( x.is_a?( String ) ) && ( x =~ /^[A-z-]+$/ ) }
   end
+
 end

@@ -13,8 +13,11 @@ class Format
         nom_info = info.split("=")[0]
         nom = nom_info.split(",")[0]
         prenoms = nom_info.split(",")[1..-1]
-
-        etudiant = Etudiant.new( nom, prenoms)
+        
+        etudiant = Etudiant.create do |e|
+                      e.nom = nom
+                      e.prenoms = prenoms
+                   end
 
         if info.split("=")[1] != nil
           notes_info = info.split("=")[1]
