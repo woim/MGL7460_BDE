@@ -179,6 +179,19 @@ command :moyenne do |c|
   end
 end
 
+desc 'Exporter la base de donnee en format json'
+command :json do |c|
+  c.desc 'Selectionner le nom du fichier json'
+  c.arg_name 'sigle_cours'
+  c.flag [:n,:nom]
+
+  c.action do |global_options,options,args|
+    nom_fichier = options[:nom]
+    baseDonneeCours.export_json( nom_fichier )
+  end
+end
+
+
 pre do |global,command,options,args|
   baseDonneeCours.charger_base_donnee( global[:fichier] )
   true

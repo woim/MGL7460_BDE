@@ -38,7 +38,7 @@ class BdCours
   end
 
   def export_json( nom_fichier )
-    JSON.dump(@cours.map { |e| e.to_json }, File.open( nom_fichier, "w" ))
+    JSON.dump(@cours.map { |e| e.to_json }, File.open( nom_fichier, "w" ) )
   end
 
   def retirer_cours( sigle_cours )
