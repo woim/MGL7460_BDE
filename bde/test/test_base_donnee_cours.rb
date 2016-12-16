@@ -132,7 +132,9 @@ describe BdCours do
       @bde.charger_base_donnee( "bde_test.txt" )
       @bde.export_json( "bde_test.json" )
       JSON.dump(liste_cours.map { |c| c.to_json }, File.open( "test.json" , "w" ) )
-      File.read( "bde_test.json" ).must_equal( File.read("test.json") )
+      File.read( "bde_test.json" ).must_equal( File.read( "test.json" ) )
+      effacer_base_donnee( "test.json" )
+      effacer_base_donnee( "bde_test.json" )
     end
   end
 
