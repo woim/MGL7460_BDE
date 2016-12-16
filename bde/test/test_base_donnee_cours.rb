@@ -127,4 +127,13 @@ describe BdCours do
     end
   end
 
+  describe "#export_json" do
+    it "sauve la base de donnee en format JSON" do
+      @bde.charger_base_donnee( "bde_test.txt" )
+      @bde.export_json( "bde_test.json" )
+      JSON.dump(liste_cours.map { |c| c.to_json }, File.open( "test.json" , "w" ) )
+      File.read( "bde_test.json" ).must_equal( File.read("test.json") )
+    end
+  end
+
 end

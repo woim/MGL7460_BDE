@@ -37,6 +37,10 @@ class BdCours
     @accesseur.sauvegarder_base_donnee( nom_fichier )
   end
 
+  def export_json( nom_fichier )
+    JSON.dump(@cours.map { |e| e.to_json }, File.open( nom_fichier, "w" ))
+  end
+
   def retirer_cours( sigle_cours )
     cours_effacer = Cours.new( sigle_cours )
     fail sigle_cours + " n'existe pas." if !cours_existe?( sigle_cours )

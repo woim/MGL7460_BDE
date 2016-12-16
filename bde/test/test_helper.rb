@@ -22,6 +22,5 @@ def creer_base_donnee( base_donnee_test, nom_fichier )
 end
 
 def effacer_base_donnee( nom_fichier )
-  #FileUtils.rm_f nom_fichier
   %x{rm #{nom_fichier} }
 end
