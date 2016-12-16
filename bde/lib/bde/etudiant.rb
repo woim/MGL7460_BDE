@@ -50,12 +50,12 @@ class Etudiant
     fail " notes invalides " unless notes_valides?( notes )
   end
 
-  def as_json(options={})
+  def to_json
     {
       nom: @nom,
       prenoms: @prenoms,
       notes: @notes
-    }
+    }.to_json
   end
 
   private

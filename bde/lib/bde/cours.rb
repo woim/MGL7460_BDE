@@ -52,11 +52,11 @@ class Cours
     @sigle <=> c.sigle
   end
 
-  def as_json(options={})
+  def to_json()
     {
       sigle: @sigle,
-      etudiants: @etudiants.map { |e| e.as_json },
-    }
+      etudiants: @etudiants.map { |e| e.to_json },
+    }.to_json
   end
 
   private

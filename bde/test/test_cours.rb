@@ -200,12 +200,12 @@ describe Cours do
       @json =
       {
         sigle: sigle,
-        etudiants: [@etudiant1,@etudiant2].map { |e| e.as_json }
-      }
+        etudiants: [@etudiant1,@etudiant2].map { |e| e.to_json }
+      }.to_json
     end
 
     it "convertit l'objet to json" do
-      @cours.as_json.must_equal(@json)
+      @cours.to_json.must_equal(@json)
     end
   end
 end

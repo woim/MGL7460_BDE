@@ -154,11 +154,11 @@ describe Etudiant do
         nom: nom,
         prenoms: prenoms,
         notes: notes
-      }
+      }.to_json
     end
 
     it "convertit l'objet to json" do
-      @etudiant.as_json.must_equal(@json)
+      @etudiant.to_json.must_equal(@json)
     end
   end
 
